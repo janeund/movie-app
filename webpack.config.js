@@ -24,16 +24,6 @@ module.exports = {
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
-
-        test: /\.s[ac]ss$/i,
-        use: [
-          // Creates `style` nodes from JS strings
-          MiniCssExtractPlugin.loader,
-          // Translates CSS into CommonJS
-          "css-loader",
-          // Compiles Sass to CSS
-          "sass-loader",
-        ]
       },
       {
         test: /\.js$/,
@@ -45,15 +35,11 @@ module.exports = {
           },
         },
       },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Movie&Series App',
+      title: 'Webpack App',
       filename: 'index.html',
       template: './src/index.html',
     }),
