@@ -13,27 +13,60 @@
       <div class="logo">
         <a href="/">MSB</a>
       </div>
+      <div class="search">
+        <form action="/search.html" class="search-form">
+          <div class="search-field">
+            <input type="text" id="search-term" name="search-term" placeholder="Search for anything">
+            <button class="btn" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+      <nav class="navigation">
+        <ul class="navigation-list">
+          <li class="navigation-item">
+            <a href="/">Home</a>
+          </li>
+          <li class="navigation-item">
+            <a href="/">Movies</a>
+          </li>
+          <li class="navigation-item">
+            <a href="/">TV Series</a>
+          </li>
+          <li class="navigation-item">
+            <a href="/">People</a>
+          </li>
+          <li class="navigation-item">
+            <a href="/">More</a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </header>
-  <nav class="navigation">
-    <ul class="navigation-list">
-      <li class="navigation-item">
-        <a href="/">Home</a>
-      </li>
-      <li class="navigation-item">
-        <a href="/">Discover</a>
-      </li>
-      <li class="navigation-item">
-        <a href="/">Popular</a>
-      </li>
-      <li class="navigation-item">
-        <a href="/">Movies</a>
-      </li>
-      <li class="navigation-item">
-        <a href="/">TV Series</a>
-      </li>
-    </ul>
-  </nav>
+  <main class="main-content">
+    <div class="container">
+      <section class="hero-showcase">
+        <div class="hero-text">
+          <h1>Now Trending</h1>
+        </div>
+      </section>
+      <section class="top-movies">
+        <div class="top-movies-header">
+          <h2 class="top-series-title">Top-rated movies</h2>
+          <a class="top-movies-all" href="/">view all</a>
+        </div>
+        <div class="top-movies-slider"></div>
+      </section>
+      <section class="top-series">
+        <div class="top-series-header">
+          <h2 class="top-series-title">Top-rated TV series</h2>
+          <a class="top-series-all" href="/">view all</a>
+        </div>
+        <div class="top-series-slider"></div>
+      </section>
+    </div>
+  </main>
 </body>
 
 </html>
