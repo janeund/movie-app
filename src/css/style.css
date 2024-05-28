@@ -40,11 +40,15 @@ body {
 
 .navigation-list {
   display: flex;
-  font-weight: 500;
 }
 
 .navigation-item:not(:last-child) {
   margin-right: 1rem;
+}
+
+.navigation-link {
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .search-input {
@@ -86,6 +90,35 @@ body {
   padding-block: 2rem;
 }
 
+.top-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.top-title {
+  position: relative;
+  padding-left: 0.8rem;
+}
+
+.top-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  background-color: var(--clr-green);
+  height: 100%;
+  width: 0.2rem;
+}
+
+.btn-all {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.btn-all .fa-chevron-right {
+  font-size: 0.6rem;
+  margin-left: 0.4rem;
+}
 
 /* Top Movies & TV Series card common styles */
 .card {
@@ -120,36 +153,10 @@ body {
   padding-inline: 0 20px;
 }
 
-.top-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.top-title {
-  position: relative;
-  padding-left: 0.8rem;
-}
-
-.top-title::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  background-color: var(--clr-green);
-  height: 100%;
-  width: 0.2rem;
-}
-
-.btn-all {
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-}
-
-.btn-all .fa-chevron-right {
-  font-size: 0.6rem;
-  margin-left: 0.4rem;
-}
-
 .section-mb {
   margin-bottom: 2rem;
+}
+
+.navigation-link.active {
+  color: var(--clr-green);
 }

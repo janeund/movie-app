@@ -6,6 +6,17 @@ const global = {
   API_KEY: '005504cfb7e5160f459c7987f1017218'
 }
 
+
+// Highlight active navigation link
+function hightlightActiveLink() {
+  const links = document.querySelectorAll('.navigation-link');
+  links.forEach(link => {
+    if (link.getAttribute('href') === global.currentPage) {
+      link.classList.add('active')
+    }
+  })
+}
+
 // Init App
 function init() {
   switch (global.currentPage) {
@@ -26,6 +37,8 @@ function init() {
       console.log('search');
       break;
   }
+
+  hightlightActiveLink()
 }
 
 document.addEventListener('DOMContentLoaded', init);
