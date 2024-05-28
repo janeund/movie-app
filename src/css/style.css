@@ -52,17 +52,22 @@ body {
   position: relative;
   height: 2.5rem;
   padding: 0.7rem;
-  background-color: rgba(255, 255, 255, 0.58);
+  background-color: hsla(0, 0%, 100%, .20);
   border-radius: 0.8rem;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(7.1px);
+  -webkit-backdrop-filter: blur(7.1px);
   border: none;
+}
+
+.search-input:focus {
+ outline: none;
 }
 
 .search-btn {
   position: absolute;
   border: none;
-  right: 1rem;
+  transform: translateX(-2rem);
   width: 3rem;
   height: 2.5rem;
   border-radius: 0.8rem;
@@ -70,6 +75,39 @@ body {
   color: rgb(var(--clr-light));
 }
 
+/* Hero slider */
+.hero-showcase {
+
+}
+
+/* Slider container */
+.slider-container {
+  display: flex;
+  padding-block: 2rem;
+}
+
+
+/* Top Movies & TV Series card common styles */
+.card {
+  width: 10rem;
+  height: 15rem;
+  background-color: aliceblue;
+}
+
+.card:not(:last-child) {
+  margin-right: 1rem;
+}
+
+/* Top Movies slider */
+
+/* Top Movies card */
+
+/* Top TV Series slider */
+
+/* Top TV Series card */
+.top-series-card {
+
+}
 
 
 /* ----------------------------- */
@@ -80,4 +118,38 @@ body {
   width: 100%;
   margin-inline: auto;
   padding-inline: 0 20px;
+}
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.top-title {
+  position: relative;
+  padding-left: 0.8rem;
+}
+
+.top-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  background-color: var(--clr-green);
+  height: 100%;
+  width: 0.2rem;
+}
+
+.btn-all {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.btn-all .fa-chevron-right {
+  font-size: 0.6rem;
+  margin-left: 0.4rem;
+}
+
+.section-mb {
+  margin-bottom: 2rem;
 }

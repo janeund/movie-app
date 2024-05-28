@@ -41,7 +41,7 @@
       <div class="search">
         <form action="/search.html" class="search-form">
           <div class="search-field">
-            <input class="search-input" type="text" id="search-term" name="search-term"
+            <input class="search-input" autocomplete="off" type="text" id="search-term" name="search-term"
               placeholder="Search for anything">
             <button class="search-btn" type="submit">
               <i class="fas fa-search"></i>
@@ -53,24 +53,74 @@
   </header>
   <main class="main-content">
     <div class="container">
-      <section class="hero-showcase">
+      <section class="hero-showcase section-mb">
         <div class="hero-text">
           <h1>Now Trending</h1>
+          <img class="hero-image" src="https://picsum.photos/id/1038/600/400" alt="">
         </div>
       </section>
-      <section class="top-movies">
-        <div class="top-movies-header">
-          <h2 class="top-series-title">Top-rated movies</h2>
-          <a class="top-movies-all" href="/">view all</a>
+      <section class="top-movies section-mb">
+        <div class="top-movies-header top-header">
+          <h2 class="top-movies-title top-title">Top-rated movies</h2>
+          <a class="top-movies-all btn-all" href="/">view all
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
         </div>
-        <div class="top-movies-slider"></div>
+        <div class="top-movies-slider slider">
+          <div class="slider-container">
+            <div class="top-movies-card card">
+
+            </div>
+            <div class="top-movies-card card">
+
+            </div>
+            <div class="top-movies-card card">
+
+            </div>
+            <div class="top-movies-card card">
+
+            </div>
+            <div class="top-movies-card card">
+
+            </div>
+            <div class="top-movies-card card">
+
+            </div>
+          </div>
+        </div>
       </section>
-      <section class="top-series">
-        <div class="top-series-header">
-          <h2 class="top-series-title">Top-rated TV series</h2>
-          <a class="top-series-all" href="/">view all</a>
+      <section class="top-series section-mb">
+        <div class="top-series-header top-header">
+          <h2 class="top-series-title top-title">Top-rated TV series</h2>
+          <a class="top-series-all btn-all" href="/">view all
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
         </div>
-        <div class="top-series-slider"></div>
+        <div class="top-series-slider slider">
+          <div class="slider-container">
+            <div class="top-series-card card">
+
+            </div>
+            <div class="top-series-card card">
+
+            </div>
+            <div class="top-series-card card">
+
+            </div>
+            <div class="top-series-card card">
+
+            </div>
+            <div class="top-series-card card">
+
+            </div>
+            <div class="top-series-card card">
+
+            </div>
+            <div class="top-series-card card">
+
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   </main>
