@@ -1,35 +1,83 @@
-
 /* ------------------- */
 /* Custom properties   */
 /* ------------------- */
 
 :root {
   /* colors */
+  --clr-green: #00B9AE;
+  --clr-gray: #21242D;
   --clr-dark: 230 35% 7%;
-  --clr-light: 231 77% 90%;
-  --clr-white: 0 0% 100%;
-  
-  /* font-sizes
-  --fs-900: clamp(5rem, 8vw + 1rem, 9.375rem);
-  --fs-800: 3.5rem;
-  --fs-700: 1.5rem;
-  --fs-600: 1rem;
-  --fs-500: 1rem;
-  --fs-400: 0.9375rem;
-  --fs-300: 1rem;
-  --fs-200: 0.875rem;
-  
-  /* font-families */
-  /* --ff-serif: "Bellefair", serif;
-  --ff-sans-cond: "Barlow Condensed", sans-serif;
-  --ff-sans-normal: "Barlow", sans-serif; */
+  --clr-light: 249 249 249;
+}
+
+/* set up the body */
+body {
+  font-family: 'Reddit Mono', sans-serif;
+  background-color: var(--clr-gray);
+  color: rgb(var(--clr-light));
 }
 
 /* ------------------- */
-/* Compontents         */
+/* Components          */
 /* ------------------- */
+.header {
+  padding: 0.8rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+.logo {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.navigation-list {
+  display: flex;
+  font-weight: 500;
+}
+
+.navigation-item:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.search-input {
+  display: inline-flex;
+  position: relative;
+  height: 2.5rem;
+  padding: 0.7rem;
+  background-color: rgba(255, 255, 255, 0.58);
+  border-radius: 0.8rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.1px);
+  border: none;
+}
+
+.search-btn {
+  position: absolute;
+  border: none;
+  right: 1rem;
+  width: 3rem;
+  height: 2.5rem;
+  border-radius: 0.8rem;
+  background-color: var(--clr-green);
+  color: rgb(var(--clr-light));
+}
+
 
 
 /* ----------------------------- */
-/* Layout                        */
+/* Utility classes               */
 /* ----------------------------- */
+.container {
+  max-width: 1000px;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 0 20px;
+}

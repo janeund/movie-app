@@ -12,10 +12,16 @@
   font: inherit;
 }
 
-/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role="list"],
-ol[role="list"] {
+/* Remove list styles on ul elements */
+ul {
   list-style: none;
+}
+
+/* Remove default styles for links */
+a {
+  text-decoration: none;
+  font: inherit;
+  color: inherit;
 }
 
 /* Smooth scrolling on the whole document */
