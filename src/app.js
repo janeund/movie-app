@@ -56,6 +56,11 @@ async function displayTopSeries() {
   });
 }
 
+async function displayMovieDetails() {
+  const movieID = window.location.search.split('=')[1];
+  console.log(movieID);
+}
+
 
 // Highlight active navigation link
 function hightlightActiveLink() {
@@ -75,10 +80,10 @@ function init() {
       displayTopMovies();
       displayTopSeries();
       break;
-    case '/movies.html':
-      console.log('movies');
+    case '/movie-details.html':
+      displayMovieDetails();
       break;
-    case '/series.html':
+    case '/show-details.html':
       console.log('series');
       break;
     case '/people.html':

@@ -4,17 +4,18 @@
 
 :root {
   /* colors */
-  --clr-green: #00B9AE;
-  --clr-gray: #21242D;
-  --clr-dark: 230 35% 7%;
-  --clr-light: 249 249 249;
+  --clr-green: 176, 100%, 36%;
+  --clr-gray: 225, 15%, 15%;
+  --clr-dark: 230, 35%, 7%;
+  --clr-light: 0, 0%, 98%;
+  --clr-glass: 0, 0%, 100%;
 }
 
 /* set up the body */
 body {
   font-family: 'Reddit Mono', sans-serif;
-  background-color: var(--clr-gray);
-  color: rgb(var(--clr-light));
+  background-color: hsl(var(--clr-gray));
+  color: hsl(var(--clr-light));
 }
 
 /* ------------------- */
@@ -56,7 +57,7 @@ body {
   position: relative;
   height: 2.5rem;
   padding: 0.7rem;
-  background-color: hsla(0, 0%, 100%, .20);
+  background-color: hsla(var(--clr-glass), .10);
   border-radius: 0.8rem;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(7.1px);
@@ -75,8 +76,8 @@ body {
   width: 3rem;
   height: 2.5rem;
   border-radius: 0.8rem;
-  background-color: var(--clr-green);
-  color: rgb(var(--clr-light));
+  background-color: hsl(var(--clr-green));
+  color: hsl(var(--clr-light));
 }
 
 /* Hero slider */
@@ -98,7 +99,7 @@ body {
   content: '';
   position: absolute;
   left: 0;
-  background-color: var(--clr-green);
+  background-color: hsl(var(--clr-green));
   height: 100%;
   width: 0.2rem;
 }
@@ -117,7 +118,7 @@ body {
 /* Slider container */
 .slider-container {
   display: flex;
-  padding-block: 2rem;
+  padding-block-start: 2rem;
   overflow: hidden;
 }
 
@@ -145,7 +146,7 @@ body {
 .card-title {
   font-weight: 800;
   font-size: 0.9rem;
-  color: rgb(var(--clr-light));
+  color: hsl(var(--clr-light));
   text-shadow: #21242D 1px 0 10px;
 }
 
@@ -170,6 +171,22 @@ body {
 
 /* Top TV Series card */
 
+
+/* ----------------------------- */
+/* Movie details page            */
+/* ----------------------------- */
+
+/* Back to home page button */
+.btn-back {
+  
+}
+
+/* Cast slider */
+.details-cast-slider {
+  display: flex;
+}
+
+
 /* ----------------------------- */
 /* Utility classes               */
 /* ----------------------------- */
@@ -185,5 +202,6 @@ body {
 }
 
 .navigation-link.active {
-  color: var(--clr-green);
+  color: hsl(var(--clr-green));
+  text-shadow: hsl(var(--clr-green)) 1px 0 10px;
 }
