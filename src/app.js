@@ -22,7 +22,7 @@ async function displayTopMovies() {
     card.classList.add('top-movies-card', 'card');
     card.innerHTML = 
     ` 
-          <a href="movies.html?id=${movie.id}">
+          <a href="movie-details.html?id=${movie.id}">
             <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
           </a>
           <div class="card-body">
@@ -58,7 +58,54 @@ async function displayTopSeries() {
 
 async function displayMovieDetails() {
   const movieID = window.location.search.split('=')[1];
-  console.log(movieID);
+  const movie = await fetchAPIData(`movie/${movieID}`);
+  const movieInner = document.createElement('div');
+  movieInner.innerHTML = `
+  <div class="details-top">
+    <div class="details-poster">
+      <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
+    </div>
+    <div class="details-info">
+      <h3 class="details-title-main">${movie.title}</h3>
+      <ul class="details-facts">
+        <li class="details-date">2024</li>
+        <li class="details-vote">8 / 10 <span>(12k)</span></li>
+        <li class="details-runtime">60 min</li>
+      </ul>
+      <div class="details-tagline">${movie.tagline}</div>
+      <div class="details-overview">
+        <h4 class="details-title-secondary">Overview</h4>
+        <p class="details-overview-text">${movie.overview}</p>
+      </div>
+    <div class="details-authors">
+      created by
+    </div>
+    </div>
+  </div>
+        <div class="details-bottom">
+          <div class="details-cast">
+            <div class="details-cast-slider">
+              <div class="card"></div>
+              <div class="card"></div>
+              <div class="card"></div>
+              <div class="card"></div>
+            </div>
+          </div>
+          <div class="details-reviews">
+            <h3>Reviews</h3>
+            <div class="reviews-container">
+              <div class="review-card"></div>
+            </div>
+          </div>
+          <div class="details-similar">
+            <h3>More Like This</h3>
+            <div class="similar-container">
+              <div class="similar-card"></div>
+            </div>
+          </div>
+        </div>
+  `
+  document.querySelector('.movie-details').appendChild(movieInner);
 }
 
 

@@ -58,7 +58,7 @@ body {
   height: 2.5rem;
   padding: 0.7rem;
   background-color: hsla(var(--clr-glass), .10);
-  border-radius: 0.8rem;
+  border-radius: 0.6rem;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(7.1px);
   -webkit-backdrop-filter: blur(7.1px);
@@ -75,7 +75,7 @@ body {
   transform: translateX(-2rem);
   width: 3rem;
   height: 2.5rem;
-  border-radius: 0.8rem;
+  border-radius: 0.6rem;
   background-color: hsl(var(--clr-green));
   color: hsl(var(--clr-light));
 }
@@ -177,14 +177,91 @@ body {
 /* ----------------------------- */
 
 /* Back to home page button */
+.back-home {
+  height: 2rem;
+  margin-block: 1rem;
+}
+
 .btn-back {
+  background-color: hsl(var(--clr-green));
+  padding: 0.7rem;
+  font-weight: 600;
+  text-shadow: hsl(var(--clr-light)) 1px 0 10px;
+  border-radius: 0.6rem;
+}
+
+/* Movie top information */
+.details-top {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  column-gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.details-poster img {
+  border-radius: 0.4rem;
+}
+
+.details-title-main {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.details-tagline {
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.9rem;
+  margin-bottom: 1.2rem;
+}
+
+.details-title-secondary {
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin-bottom: 0.6rem;
+}
+
+.details-overview-text {
+  font-weight: 300;
+}
+
+.details-facts {
+  display: flex;
+  margin-bottom: 0.9rem;
+}
+
+.details-facts > li {
+  font-size: 0.8rem;
+}
+
+.details-facts > li:not(:last-child) {
+  margin-right: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.details-facts > li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  background-color: hsla(var(--clr-light), .40);
+  height: 3px;
+  width: 3px;
+  border-radius: 50%;
   
+  transform: translateX(300%);
+}
+
+.details-vote span {
+  display: inline-block;
 }
 
 /* Cast slider */
 .details-cast-slider {
   display: flex;
 }
+
+
 
 
 /* ----------------------------- */
@@ -198,7 +275,7 @@ body {
 }
 
 .section-mb {
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 }
 
 .navigation-link.active {
