@@ -84,12 +84,6 @@ body {
 
 }
 
-/* Slider container */
-.slider-container {
-  display: flex;
-  padding-block: 2rem;
-}
-
 .top-header {
   display: flex;
   justify-content: space-between;
@@ -120,28 +114,61 @@ body {
   margin-left: 0.4rem;
 }
 
-/* Top Movies & TV Series card common styles */
+/* Slider container */
+.slider-container {
+  display: flex;
+  padding-block: 2rem;
+  overflow: hidden;
+}
+
+/* Slider card common styles */
 .card {
-  width: 10rem;
-  height: 15rem;
-  background-color: aliceblue;
+  min-width: 12.5rem;
+  height: 100%;
+  padding: 0.7rem;
+  min-height: 23rem;
+  background-color: hsla(0, 0%, 100%, .20);
+  border-radius: 0.4rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.1px);
+  -webkit-backdrop-filter: blur(7.1px);
 }
 
 .card:not(:last-child) {
   margin-right: 1rem;
 }
 
+.card-body {
+  padding-block-start: 0.5rem;
+}
+
+.card-title {
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: rgb(var(--clr-light));
+  text-shadow: #21242D 1px 0 10px;
+}
+
+.card-text {
+  font-size: 0.75rem;
+  font-weight: 300;
+  margin-top: 0.2rem;
+}
+
+/* Slider card image */
+.slider-card-image {
+  object-fit: cover;
+  border-radius: 0.4rem;
+}
+
 /* Top Movies slider */
 
 /* Top Movies card */
 
+
 /* Top TV Series slider */
 
 /* Top TV Series card */
-.top-series-card {
-
-}
-
 
 /* ----------------------------- */
 /* Utility classes               */
