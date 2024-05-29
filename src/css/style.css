@@ -127,7 +127,7 @@ body {
   min-width: 12.5rem;
   height: 100%;
   padding: 0.7rem;
-  min-height: 23rem;
+  min-height: 22rem;
   background-color: hsla(0, 0%, 100%, .20);
   border-radius: 0.4rem;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -179,15 +179,23 @@ body {
 /* Back to home page button */
 .back-home {
   height: 2rem;
-  margin-block: 1rem;
+  margin-block: 2rem;
 }
 
 .btn-back {
+  display: inline-flex;
+  align-items: center;
   background-color: hsl(var(--clr-green));
-  padding: 0.7rem;
+  padding: 0.6rem;
   font-weight: 600;
+  font-size: 0.8rem;
   text-shadow: hsl(var(--clr-light)) 1px 0 10px;
   border-radius: 0.6rem;
+}
+
+.fa-chevron-left {
+  font-size: 0.6rem;
+  padding-right: 0.3rem;
 }
 
 /* Movie top information */
@@ -215,9 +223,24 @@ body {
 }
 
 .details-title-secondary {
+  position: relative;
   font-weight: 600;
   font-size: 1.3rem;
   margin-bottom: 0.6rem;
+  padding-left: 0.8rem;
+}
+
+.details-title-secondary::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  background-color: hsl(var(--clr-green));
+  height: 100%;
+  width: 0.2rem;
+}
+
+.details-overview {
+  margin-bottom: 2rem;
 }
 
 .details-overview-text {
@@ -226,22 +249,22 @@ body {
 
 .details-facts {
   display: flex;
-  margin-bottom: 0.9rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 .details-facts > li {
   font-size: 0.8rem;
+  background-color: hsla(var(--clr-glass), .10);
+  padding: 0.5rem;
+  border-radius: 0.4rem;
 }
 
 .details-facts > li:not(:last-child) {
   margin-right: 1rem;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: end;
 }
 
-.details-facts > li:not(:last-child)::after {
+/* .details-facts > li:not(:last-child)::after {
   content: '';
   position: absolute;
   background-color: hsla(var(--clr-light), .40);
@@ -250,10 +273,25 @@ body {
   border-radius: 50%;
   
   transform: translateX(300%);
+} */
+
+.details-vote {
+  display: flex;
+  align-items: center;
 }
 
-.details-vote span {
-  display: inline-block;
+.fa-star {
+  color: gold;
+}
+
+.vote-total {
+  font-size: 0.7rem;
+  font-weight: 300;
+  margin-left: 0.5rem;
+}
+
+.rating {
+  margin-left: 0.5rem;
 }
 
 /* Cast slider */
@@ -261,7 +299,19 @@ body {
   display: flex;
 }
 
+.genres {
+  display: flex;
+}
 
+.genre {
+  background-color: hsla(var(--clr-glass), .10);
+  padding: 0.4rem;
+  border-radius: 0.4rem;
+}
+
+.genre:not(:last-child) {
+  margin-right: 0.8rem;
+}
 
 
 /* ----------------------------- */

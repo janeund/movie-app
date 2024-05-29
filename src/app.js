@@ -68,46 +68,62 @@ async function displayMovieDetails() {
     <div class="details-info">
       <h3 class="details-title-main">${movie.title}</h3>
       <ul class="details-facts">
-        <li class="details-date">2024</li>
-        <li class="details-vote">8 / 10 <span>(12k)</span></li>
-        <li class="details-runtime">60 min</li>
+        <li class="details-date">${movie.release_date.slice(0, 4)}</li>
+        <li class="details-vote">
+          <i class="fa-solid fa-star"></i>
+          <div class="rating">${movie.vote_average.toFixed(1)} / 10 </div>
+          <div class="vote-total">(${(movie.vote_count / 1000).toFixed(1)}k)</div>
+        </li>
+        <li class="details-runtime">${minToHours(movie.runtime)}</li>
       </ul>
       <div class="details-tagline">${movie.tagline}</div>
       <div class="details-overview">
         <h4 class="details-title-secondary">Overview</h4>
         <p class="details-overview-text">${movie.overview}</p>
       </div>
-    <div class="details-authors">
-      created by
+    <div class="details-genres">
+      <h4 class="details-title-secondary">Genres</h4>
+      <ul class="genres">
+      ${movie.genres.map(genre => `<li class="genre">${genre.name}</li>`).join('')}
+      </ul>
     </div>
     </div>
   </div>
-        <div class="details-bottom">
-          <div class="details-cast">
-            <div class="details-cast-slider">
-              <div class="card"></div>
-              <div class="card"></div>
-              <div class="card"></div>
-              <div class="card"></div>
-            </div>
-          </div>
-          <div class="details-reviews">
-            <h3>Reviews</h3>
-            <div class="reviews-container">
-              <div class="review-card"></div>
-            </div>
-          </div>
-          <div class="details-similar">
-            <h3>More Like This</h3>
-            <div class="similar-container">
-              <div class="similar-card"></div>
-            </div>
-          </div>
-        </div>
   `
   document.querySelector('.movie-details').appendChild(movieInner);
 }
 
+// Display movie actors cast slider
+async function displayMovieCast() {
+  const movieID = window.location.search.split('=')[1];
+  const { cast } = await fetchAPIData(`movie/${movieID}/credits`);
+  const actors = cast.filter(actor => actor.known_for_department === 'Acting').slice(0, 10);
+  actors.forEach(actor => {
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.innerHTML =
+    `
+      <a href="movie-details.html?id=${movieID}">
+        <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${actor.profile_path}" alt="${actor.name}">
+      </a>
+      <div class="card-body">
+        <h5 class="card-title">${actor.name}</h5>
+        <p class="card-text">${actor.character}</p>
+      </div>
+  `;
+  document.querySelector('.details-cast').appendChild(card);
+  });
+}
+
+// Display movie reviews
+
+// Convert total minutes to hours with minutes reminder
+function minToHours(data) {
+  const hours = Math.floor(data / 60);
+  console.log(data);
+  const min = data % 60; 
+  return `${hours}h ${min}min`;
+}
 
 // Highlight active navigation link
 function hightlightActiveLink() {
@@ -129,6 +145,7 @@ function init() {
       break;
     case '/movie-details.html':
       displayMovieDetails();
+      displayMovieCast();
       break;
     case '/show-details.html':
       console.log('series');
