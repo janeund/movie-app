@@ -311,8 +311,74 @@ body {
 
 .genre:not(:last-child) {
   margin-right: 0.8rem;
+  
 }
 
+/* User reviews section */
+
+.reviews-container {
+  padding: 1rem;
+  
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 20rem;
+  min-height: 12rem;
+  height: 100%;
+  padding: 1rem;
+  background-color: hsla(0, 0%, 100%, .70);
+  box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+  border-radius: 0.4rem;
+  color: hsl(var(--clr-dark));
+}
+
+.review-card:not(:last-child) {
+  margin-right: 2rem;
+}
+
+.review-card-header {
+  display: flex;
+  align-items: center;
+  column-gap: 0.8rem;
+}
+
+.review-card-avatar {
+  
+}
+
+.review-image {
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover;
+}
+
+.review-card-username {
+  font-size: 0.8rem;
+}
+
+.review-card-username span {
+ font-weight: 800;
+}
+
+.review-card-main {
+  flex: 1 0 auto;
+  padding-block-start: 0.8rem;
+}
+.review-card-text {
+  font-size: 0.9rem;
+}
+.review-card-footer {
+  display: flex;
+  justify-content: space-between;
+  flex: 0 0 auto;
+  padding-block-start: 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-block-start: 1px solid hsla(var(--clr-gray), 0.3);
+}
 
 /* ----------------------------- */
 /* Utility classes               */

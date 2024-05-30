@@ -1,10 +1,17 @@
 import "./css/style.css";
 import "./css/reset.css";
 
+function addImage(container) {
+  const img = document.createElement('img');
+  img.src = userIcon;
+  document.querySelector(container).appendChild(img);
+}
+
 const global = {
   currentPage: window.location.pathname,
   API_KEY: '005504cfb7e5160f459c7987f1017218',
-  API_URL: 'https://api.themoviedb.org/3/'
+  API_URL: 'https://api.themoviedb.org/3/',
+  movieID: window.location.search.split('=')[1]
 }
 
 // Fetch data from tmdb API
@@ -20,17 +27,14 @@ async function displayTopMovies() {
   results.forEach(movie => {
     const card = document.createElement('div');
     card.classList.add('top-movies-card', 'card');
-    card.innerHTML = 
-    ` 
-          <a href="movie-details.html?id=${movie.id}">
-            <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
-          </a>
-          <div class="card-body">
-            <h5 class="card-title">${movie.title}</h5>
-            <p class="card-text">${movie.release_date}</p>
-          </div>
-     
-    `;
+    card.innerHTML = ` 
+    <a href="movie-details.html?id=${movie.id}">
+      <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
+    </a>
+    <div class="card-body">
+      <h5 class="card-title">${movie.title}</h5>
+      <p class="card-text">${movie.release_date}</p>
+    </div>`;
     document.querySelector('.top-movies-slider-container').appendChild(card);
   });
 }
@@ -41,17 +45,14 @@ async function displayTopSeries() {
   results.forEach(tv => {
     const card = document.createElement('div');
     card.classList.add('top-series-card', 'card');
-    card.innerHTML = 
-    ` 
-          <a href="series.html?id=${tv.id}">
-            <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${tv.poster_path}" alt="${tv.name}">
-          </a>
-          <div class="card-body">
-            <h5 class="card-title">${tv.name}</h5>
-            <p class="card-text">${tv.first_air_date}</p>
-          </div>
-     
-    `;
+    card.innerHTML = ` 
+    <a href="series.html?id=${tv.id}">
+      <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${tv.poster_path}" alt="${tv.name}">
+    </a>
+    <div class="card-body">
+      <h5 class="card-title">${tv.name}</h5>
+      <p class="card-text">${tv.first_air_date}</p>
+    </div>`;
     document.querySelector('.top-series-slider-container').appendChild(card);
   });
 }
@@ -88,8 +89,7 @@ async function displayMovieDetails() {
       </ul>
     </div>
     </div>
-  </div>
-  `
+  </div>`;
   document.querySelector('.movie-details').appendChild(movieInner);
 }
 
@@ -101,21 +101,52 @@ async function displayMovieCast() {
   actors.forEach(actor => {
     const card = document.createElement('div');
     card.classList.add('card');
-    card.innerHTML =
-    `
+    card.innerHTML = `
       <a href="movie-details.html?id=${movieID}">
         <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${actor.profile_path}" alt="${actor.name}">
       </a>
       <div class="card-body">
         <h5 class="card-title">${actor.name}</h5>
         <p class="card-text">${actor.character}</p>
-      </div>
-  `;
+      </div>`;
   document.querySelector('.details-cast').appendChild(card);
   });
 }
 
 // Display movie reviews
+async function displayMovieReviews() {
+  const { results } = await fetchAPIData(`movie/${global.movieID}/reviews`);
+  results.forEach(review => {
+    const card = document.createElement('div');
+    card.classList.add('review-card');
+    card.innerHTML = `
+        <div class="review-card-header">
+          <div class="review-card-avatar">
+          ${
+            review.author_details.avatar_path 
+            ? `<img class="review-image" src="https://image.tmdb.org/t/p/w500/${review.author_details.avatar_path}" alt="${review.author_details.username}">`
+            : `<img class="review-image" src="./user-icon.svg" alt="${review.author_details.username}">`
+          }
+          </div>
+          <div class="review-card-username">Review by <span>${review.author_details.username}</span></div>
+        </div>
+        <div class="review-card-main">
+          <p class="review-card-text">${review.content.slice(0, 50)}</p>
+        </div>
+        <div class="review-card-footer">
+          <div class="review-card-rating">
+            <i class="fa-solid fa-star"></i>
+            ${ 
+              review.author_details.rating 
+              ? `${review.author_details.rating} / 10` 
+              : `<div></div>`
+            }
+          </div>
+          <div class="review-date">${new Date(review.created_at).toLocaleDateString('en-US')}</div>
+        </div>`;
+      document.querySelector('.reviews-container').appendChild(card);
+  })
+}
 
 // Convert total minutes to hours with minutes reminder
 function minToHours(data) {
@@ -146,6 +177,7 @@ function init() {
     case '/movie-details.html':
       displayMovieDetails();
       displayMovieCast();
+      displayMovieReviews();
       break;
     case '/show-details.html':
       console.log('series');
