@@ -1,11 +1,11 @@
 import "./css/style.css";
 import "./css/reset.css";
 
-function addImage(container) {
-  const img = document.createElement('img');
-  img.src = userIcon;
-  document.querySelector(container).appendChild(img);
-}
+// function addImage(container) {
+//   const img = document.createElement('img');
+//   img.src = userIcon;
+//   document.querySelector(container).appendChild(img);
+// }
 
 const global = {
   currentPage: window.location.pathname,
@@ -148,6 +148,20 @@ async function displayMovieReviews() {
   })
 }
 
+// Display hero slider
+async function displayHeroSlider() {
+  // const imageUrl = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
+  const { results } = await fetchAPIData('trending/movie/day');
+  results.forEach(item => {
+    const div = document.createElement('div');
+    div.classList.add('tranding-item');
+    div.innerHTML = `
+    <img src="https://image.tmdb.org/t/p/original/${item.backdrop_path}">
+    `;
+    document.querySelector('.hero-slider').appendChild(div);
+  })
+}
+
 // Convert total minutes to hours with minutes reminder
 function minToHours(data) {
   const hours = Math.floor(data / 60);
@@ -171,6 +185,7 @@ function init() {
   switch (global.currentPage) {
     case '/':
     case '/index.html':
+      displayHeroSlider();
       displayTopMovies();
       displayTopSeries();
       break;

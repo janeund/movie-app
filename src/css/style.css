@@ -81,9 +81,37 @@ body {
 }
 
 /* Hero slider */
-.hero-showcase {
-
+.hero-container {
+  height: 25rem;
 }
+
+.hero-slider {
+  
+  overflow: hidden;
+  height: 100%;
+  border-radius: 0.6rem;
+}
+
+.tranding-item {
+  
+}
+
+.tranding-item img {
+  position: relative;
+  object-fit: cover;
+  border-radius: 0.6rem;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+.tranding-item img::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent, #000);
+}
+
 
 .top-header {
   display: flex;
