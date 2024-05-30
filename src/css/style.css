@@ -345,6 +345,17 @@ body {
 }
 
 .review-card-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(var(--clr-light));
+  border-radius: 50%;
+  border: 0.1rem solid hsl(var(--clr-dark));
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.fa-user {
   
 }
 

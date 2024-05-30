@@ -125,7 +125,7 @@ async function displayMovieReviews() {
           ${
             review.author_details.avatar_path 
             ? `<img class="review-image" src="https://image.tmdb.org/t/p/w500/${review.author_details.avatar_path}" alt="${review.author_details.username}">`
-            : `<img class="review-image" src="./user-icon.svg" alt="${review.author_details.username}">`
+            : `<i class="fa-regular fa-user"></i>`
           }
           </div>
           <div class="review-card-username">Review by <span>${review.author_details.username}</span></div>
