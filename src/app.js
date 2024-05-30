@@ -151,15 +151,20 @@ async function displayMovieReviews() {
 // Display hero slider
 async function displayHeroSlider() {
   // const imageUrl = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
-  const { results } = await fetchAPIData('trending/movie/day');
+  const { results } = await fetchAPIData('trending/all/day');
   results.forEach(item => {
     const div = document.createElement('div');
-    div.classList.add('tranding-item');
+    div.classList.add('trending-item');
     div.innerHTML = `
-    <img src="https://image.tmdb.org/t/p/original/${item.backdrop_path}">
+    <img class="tranding-item-img" src="https://image.tmdb.org/t/p/original/${item.backdrop_path}">
+    <div class="hero-content">
+      <h2 class="hero-title">${item.title}</h2>
+      <p class="hero-title">${item.overview}</p>
+    </div>
     `;
     document.querySelector('.hero-slider').appendChild(div);
-  })
+  });
+  // initHeroSlider();
 }
 
 // Convert total minutes to hours with minutes reminder
@@ -178,6 +183,25 @@ function hightlightActiveLink() {
       link.classList.add('active')
     }
   })
+}
+
+// Init hero slideshow
+function initHeroSlider() {
+  let slideIndex = 0;
+  showSlides();
+  function showSlides() {
+    let slides = document.querySelectorAll('.trending-item');
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = 'none';
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {
+    slideIndex = 1;
+  }
+  slides[slideIndex - 1].style.display = "block";
+  setTimeout(showSlides, 4000)
+  }
+  
 }
 
 // Init App

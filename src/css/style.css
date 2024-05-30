@@ -86,32 +86,30 @@ body {
 }
 
 .hero-slider {
-  
+  position: relative;
   overflow: hidden;
   height: 100%;
   border-radius: 0.6rem;
 }
 
-.tranding-item {
-  
+.trending-item {
+  position: absolute;
+  display: none;
 }
 
-.tranding-item img {
+.tranding-item-img {
   position: relative;
+  height: auto;
   object-fit: cover;
   border-radius: 0.6rem;
   z-index: -1;
   opacity: 0.6;
 }
 
-.tranding-item img::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(transparent, #000);
+.hero-content {
+  z-index: 1;
+  color: hsl(var(--clr-light));
 }
-
 
 .top-header {
   display: flex;
