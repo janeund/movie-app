@@ -63,8 +63,7 @@ async function displayPopularMovies() {
   results.forEach(movie => {
     const card = document.createElement('div');
     card.classList.add('popular-movie-card', 'card');
-    card.innerHTML = ` 
-   
+    card.innerHTML = `
         <a href="movie-details.html?id=${movie.id}">
           <img class='popular-card-image' src="https://image.tmdb.org/t/p/w500/${movie.poster_path}"
             alt="${movie.title}">
@@ -73,7 +72,7 @@ async function displayPopularMovies() {
           <h5 class="card-title">${movie.title}</h5>
           <p class="card-text">${movie.release_date}</p>
         </div>`;
-    document.querySelector('.popular-movies-container').appendChild(card);
+    document.querySelector('.popular-movies-wrapper').appendChild(card);
   });
 }
 
