@@ -152,14 +152,39 @@ async function displayMovieReviews() {
 async function displayHeroSlider() {
   // const imageUrl = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
   const { results } = await fetchAPIData('trending/all/day');
-  results.forEach(item => {
+  const { genres } = await fetchAPIData('genre/tv/list');
+  // console.log(genres);
+  
+  results.slice(0, 1).forEach(item => {
     const div = document.createElement('div');
     div.classList.add('trending-item');
     div.innerHTML = `
-    <img class="tranding-item-img" src="https://image.tmdb.org/t/p/original/${item.backdrop_path}">
-    <div class="hero-content">
-      <h2 class="hero-title">${item.title}</h2>
-      <p class="hero-title">${item.overview}</p>
+    <div class="trending-image-container">
+      <img class="trending-item-img" src="https://image.tmdb.org/t/p/original/${item.backdrop_path}">
+    </div>
+    <div class="hero-item-content">
+      <h2 class="hero-item-title">${item.title}</h2>
+      <ul class="details-facts">
+        <li class="details-date">${item.release_date.slice(0, 4)}</li>
+        <li class="details-vote">
+          <i class="fa-solid fa-star"></i>
+          <div class="rating">${item.vote_average.toFixed(1)} / 10 </div>
+          <div class="vote-total">(${(item.vote_count / 1000).toFixed(1)}k)</div>
+        </li>
+        <li class="genres-hero">
+          <div class="details-genres">
+            <ul class="genres">
+              ${ console.log()
+              }
+            </ul>
+          </div>
+        </li>
+      </ul>
+      <p class="hero-item-overview">${item.overview}</p>
+      <div class="learn-more-btn">
+        <a class="btn more-btn" href="/index.html">Learn More</a>
+      </div>
+      
     </div>
     `;
     document.querySelector('.hero-slider').appendChild(div);
