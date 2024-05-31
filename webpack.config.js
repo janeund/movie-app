@@ -52,6 +52,16 @@ module.exports = {
       filename: 'movie-details.html',
       template: './src/movie-details.html',
     }),
+    new HtmlWebpackPlugin({
+      title: 'MSB | Movies',
+      filename: 'movies.html',
+      template: './src/movies.html',
+    }),
+    new HtmlWebpackPlugin({
+      title: 'MSB | Shows',
+      filename: 'shows.html',
+      template: './src/shows.html',
+    }),
     new MiniCssExtractPlugin(),
   ],
 };

@@ -57,6 +57,27 @@ async function displayTopSeries() {
   });
 }
 
+// Display popular movies
+async function displayPopularMovies() {
+  const { results } = await fetchAPIData('movie/popular');
+  results.forEach(movie => {
+    const card = document.createElement('div');
+    card.classList.add('popular-movie-card', 'card');
+    card.innerHTML = ` 
+   
+        <a href="movie-details.html?id=${movie.id}">
+          <img class='popular-card-image' src="https://image.tmdb.org/t/p/w500/${movie.poster_path}"
+            alt="${movie.title}">
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">${movie.title}</h5>
+          <p class="card-text">${movie.release_date}</p>
+        </div>`;
+    document.querySelector('.popular-movies-container').appendChild(card);
+  });
+}
+
+// Display movie details
 async function displayMovieDetails() {
   const movieID = window.location.search.split('=')[1];
   const movie = await fetchAPIData(`movie/${movieID}`);
@@ -182,7 +203,7 @@ async function displayHeroSlider() {
       </ul>
       <p class="hero-item-overview">${item.overview}</p>
       <div class="learn-more-btn">
-        <a class="btn more-btn" href="/index.html">Learn More</a>
+        <a class="btn more-btn" href="movie-details.html?id=${item.id}">Learn More</a>
       </div>
       
     </div>
@@ -243,7 +264,13 @@ function init() {
       displayMovieCast();
       displayMovieReviews();
       break;
+    case '/movies.html':
+      displayPopularMovies();
+      break;
     case '/show-details.html':
+      console.log('series');
+      break;
+    case '/shows.html':
       console.log('series');
       break;
     case '/people.html':
