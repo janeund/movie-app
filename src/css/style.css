@@ -262,9 +262,9 @@ body {
 } 
 
 /* ----------------------------- */
-/* Popular movies page           */
+/* Popular movies and shows page */
 /* ----------------------------- */
-.popular-movies-wrapper {
+.popular-wrapper{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   gap: 1.5rem;

@@ -54,6 +54,11 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       title: 'MSB | Movies',
+      filename: 'show-details.html',
+      template: './src/show-details.html',
+    }),
+    new HtmlWebpackPlugin({
+      title: 'MSB | Movies',
       filename: 'movies.html',
       template: './src/movies.html',
     }),
