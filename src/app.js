@@ -82,6 +82,7 @@ async function displayPopularMovies() {
 async function displayMovieDetails() {
   const movieID = window.location.search.split('=')[1];
   const movie = await fetchAPIData(`movie/${movieID}`);
+  displayOverlayImage('movie', movie.backdrop_path)
   const movieInner = document.createElement('div');
   movieInner.innerHTML = `
   <div class="details-top">
@@ -261,6 +262,18 @@ function hideLoader() {
   document.querySelector('.loader-overlay').classList.remove('show'); 
 }
 
+
+// Display overlay image for movies/shows details pages
+function displayOverlayImage(type, overlayPath) {
+  const overlay = document.createElement('div');
+  overlay.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${overlayPath})`;
+  overlay.classList.add('details-overlay-image');
+  if (type === 'movie') {
+    document.querySelector('.movie-details').appendChild(overlay);
+  } else if (type === 'show') {
+    document.querySelector('.show-details').appendChild(overlay);
+  }
+}
 
 // Init App
 function init() {
