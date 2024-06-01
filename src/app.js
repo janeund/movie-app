@@ -16,8 +16,10 @@ const global = {
 
 // Fetch data from tmdb API
 async function fetchAPIData(endpoint) {
+  toggleLoader('load');
   const res = await fetch(`${global.API_URL}${endpoint}?api_key=${global.API_KEY}&language=en-US`);
   const data = await res.json();
+  toggleLoader('end');
   return data;
 }
 
@@ -171,7 +173,7 @@ async function displayMovieReviews() {
 // Display hero slider
 async function displayHeroSlider() {
   // const imageUrl = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
-  const { results } = await fetchAPIData('trending/all/day');
+  const { results } = await fetchAPIData('trending/all/week');
   const { genres } = await fetchAPIData('genre/tv/list');
   // console.log(genres);
   
@@ -248,6 +250,16 @@ function initHeroSlider() {
   }
   
 }
+
+// Toggle loader while loading api data
+function toggleLoader(point) {
+  if (point === 'load') {
+    document.querySelector('.loader-overlay').classList.add('show');
+  } else if (point === 'end') {
+    document.querySelector('.loader-overlay').classList.remove('show');
+  }
+}
+
 
 // Init App
 function init() {
