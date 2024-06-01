@@ -16,10 +16,10 @@ const global = {
 
 // Fetch data from tmdb API
 async function fetchAPIData(endpoint) {
-  toggleLoader('load');
+  showLoader();
   const res = await fetch(`${global.API_URL}${endpoint}?api_key=${global.API_KEY}&language=en-US`);
   const data = await res.json();
-  toggleLoader('end');
+  hideLoader();
   return data;
 }
 
@@ -251,13 +251,14 @@ function initHeroSlider() {
   
 }
 
-// Toggle loader while loading api data
-function toggleLoader(point) {
-  if (point === 'load') {
-    document.querySelector('.loader-overlay').classList.add('show');
-  } else if (point === 'end') {
-    document.querySelector('.loader-overlay').classList.remove('show');
-  }
+// Show loader while loading api data
+function showLoader() {
+  document.querySelector('.loader-overlay').classList.add('show');
+}
+
+// Hide loader after api data is loaded
+function hideLoader() {
+  document.querySelector('.loader-overlay').classList.remove('show'); 
 }
 
 
