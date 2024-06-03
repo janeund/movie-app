@@ -235,6 +235,7 @@ async function displayPopularShows() {
   });
 }
 
+
 // Display show details
 async function displayShowDetails() {
   const showID = window.location.search.split('=')[1];
@@ -337,6 +338,56 @@ async function displayShowReviews() {
  
 }
 
+// Display popular people
+async function displayPopularPeople() {
+  const { results } = await fetchAPIData('person/popular');
+  results.forEach(person => {
+    const card = document.createElement('div');
+    card.classList.add('popular-person-card', 'card');
+    card.innerHTML = `
+        <a href="person-details.html?id=${person.id}">
+          <img class='popular-card-image' src="https://image.tmdb.org/t/p/w500/${person.profile_path}"
+            alt="${person.name}">
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">${person.name}</h5>
+          <p class="card-text">${person.known_for_department}</p>
+        </div>`;
+    document.querySelector('.popular-people-wrapper').appendChild(card);
+  });
+}
+
+// Display person details
+async function displayPersonDetails() {
+  const personID = window.location.search.split('=')[1];
+  const person = await fetchAPIData(`person/${personID}`);
+  // displayOverlayImage('person', person.backdrop_path)
+  const personInner = document.createElement('div');
+  personInner.innerHTML = `
+  <div class="details-top">
+    <div class="details-poster">
+      <img src="https://image.tmdb.org/t/p/w500/${person.profile_path}" alt="${person.name}">
+    </div>
+    <div class="details-info">
+      <h3 class="details-title-main">${person.name}</h3>
+      <ul class="details-facts">
+        <li class="details-department">${person.known_for_department}</li>
+      </ul>
+      <div class="details-overview">
+        <h4 class="details-title-secondary">Biography</h4>
+        <p class="details-overview-text">${person.biography}</p>
+      </div>
+    <div class="details-genres">
+      <h4 class="details-title-secondary">Genres</h4>
+      <ul class="genres">
+      
+      </ul>
+    </div>
+    </div>
+  </div>`;
+  document.querySelector('.person-details').appendChild(personInner);
+}
+
 // Convert total minutes to hours with minutes reminder
 function minToHours(data) {
   const hours = Math.floor(data / 60);
@@ -393,6 +444,8 @@ function displayOverlayImage(type, overlayPath) {
     document.querySelector('.movie-details').appendChild(overlay);
   } else if (type === 'show') {
     document.querySelector('.show-details').appendChild(overlay);
+  } else if (type === 'person') {
+    document.querySelector('.person-details').appendChild(overlay);
   }
 }
 
@@ -422,7 +475,10 @@ function init() {
       displayPopularShows();
       break;
     case '/people.html':
-      console.log('people');
+      displayPopularPeople();
+      break;
+    case '/person-details.html':
+      displayPersonDetails();
       break;
     case '/search.html':
       console.log('search');

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>
+    home
+  </title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container header-container">
+      <div class="logo">
+        <a href="/">MSB</a>
+      </div>
+      <nav class="navigation">
+        <ul class="navigation-list">
+          <li class="navigation-item">
+            <a class="navigation-link" href="/">Home</a>
+          </li>
+          <li class="navigation-item">
+            <a class="navigation-link" href="/movies.html">Movies</a>
+          </li>
+          <li class="navigation-item">
+            <a class="navigation-link" href="/shows.html">TV Series</a>
+          </li>
+          <li class="navigation-item">
+            <a class="navigation-link" href="/people.html">People</a>
+          </li>
+          <!-- <li class="navigation-item">
+            <a class="navigation-link" href="/">More</a>
+          </li> -->
+        </ul>
+      </nav>
+      <div class="search">
+        <form action="/search.html" class="search-form">
+          <div class="search-field">
+            <input class="search-input" autocomplete="off" type="text" id="search-term" name="search-term"
+              placeholder="Search for anything">
+            <button class="search-btn" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="main-content">
+    <div class="container">
+      <h1 class="shows-title popular-title">Popular Celebs</h1>
+      <div class="shows-filters filters">
+        <ul class="shows-filters-list filters-list">
+          <li class="shows-filter-item filter-item">Sort</li>
+          <li class="shows-filter-item filter-item">Genre</li>
+          <li class="shows-filter-item filter-item">Sort</li>
+          <li class="shows-filter-item filter-item">Production company</li>
+        </ul>
+        <button class="reset-filters">Reset filters</button>
+      </div>
+      <div class="popular-people-wrapper popular-wrapper"></div>
+      <button class="load-more">Load more</button>
+    </div>
+  </main>
+  <div class="loader-overlay">
+    <div class="loader"></div>
+  </div>
+</body>
+
+</html>
