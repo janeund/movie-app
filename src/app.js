@@ -12,7 +12,8 @@ const global = {
   API_KEY: '005504cfb7e5160f459c7987f1017218',
   API_URL: 'https://api.themoviedb.org/3/',
   movieID: window.location.search.split('=')[1],
-  showID: window.location.search.split('=')[1]
+  showID: window.location.search.split('=')[1],
+  personID: window.location.search.split('=')[1],
 }
 
 // Fetch data from tmdb API
@@ -41,7 +42,7 @@ async function displayHeroSlider() {
     <div class="hero-item-content">
       <h2 class="hero-item-title">${item.title}</h2>
       <ul class="details-facts">
-        <li class="details-date">${item.release_date.slice(0, 4)}</li>
+        <li class="details-date">${item.release_date}</li>
         <li class="details-vote">
           <i class="fa-solid fa-star"></i>
           <div class="rating">${item.vote_average.toFixed(1)} / 10 </div>
@@ -170,7 +171,7 @@ async function displayMovieCast() {
     const card = document.createElement('div');
     card.classList.add('card');
     card.innerHTML = `
-      <a href="movie-details.html?id=${movieID}">
+      <a href="person-details.html?id=${actor.id}">
         <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${actor.profile_path}" alt="${actor.name}">
       </a>
       <div class="card-body">
@@ -284,7 +285,7 @@ async function displayShowCast() {
       const card = document.createElement('div');
       card.classList.add('card');
       card.innerHTML = `
-        <a href="show-details.html?id=${showID}">
+        <a href="person-details.html?id=${actor.id}">
           <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${actor.profile_path}" alt="${actor.name}">
         </a>
         <div class="card-body">
@@ -371,7 +372,9 @@ async function displayPersonDetails() {
     <div class="details-info">
       <h3 class="details-title-main">${person.name}</h3>
       <ul class="details-facts">
-        <li class="details-department">${person.known_for_department}</li>
+        <li class="details-department">
+        ${person.known_for_department}
+        </li>
       </ul>
       <div class="details-overview">
         <h4 class="details-title-secondary">Biography</h4>
@@ -379,13 +382,72 @@ async function displayPersonDetails() {
       </div>
     <div class="details-genres">
       <h4 class="details-title-secondary">Genres</h4>
-      <ul class="genres">
-      
+      <ul class="genres"> 
       </ul>
     </div>
     </div>
   </div>`;
   document.querySelector('.person-details').appendChild(personInner);
+}
+
+// Display person images on person details page
+async function displayPersonImages() {
+  const { profiles } = await fetchAPIData(`person/${global.personID}/images`);
+  console.log(profiles);
+  profiles.forEach(image => {
+    const card = document.createElement('div');
+    card.classList.add('photo');
+    card.innerHTML = `
+      <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${image.file_path}" alt="profile">`;
+    document.querySelector('.photos-container').appendChild(card);
+  })
+}
+
+// Display person credits on person details page
+async function displayPersonCredits() {
+  const { cast } = await fetchAPIData(`person/${global.personID}/combined_credits`);
+  cast.forEach(credit => {
+    if (credit.title) {
+      const card = document.createElement('li');
+    card.classList.add('credits-item');
+    card.innerHTML = `
+              <div class="credit-poster">
+              ${
+                credit.poster_path 
+                ? `<img src="https://image.tmdb.org/t/p/w500/${credit.poster_path}" alt="${credit.title}">`
+                : `<div class='no-image'>No image</div>`
+              }
+              </div>
+              <div class="credit-info">
+                <div class="credits-item-top">
+                  <h4 class="credits-item-title">${credit.title}</h4>
+                  <p class="credits-item-date">
+                  ${
+                    credit.release_date
+                    ? credit.release_date.slice(0, 4)
+                    : ''
+                  }
+                  </p>
+                </div>
+                <div class="credits-facts">
+                  ${
+                    credit.vote_average
+                    ? `
+                    <div class="credits-vote">
+                      <i class="fa-solid fa-star"></i>
+                      <div class="rating">${credit.vote_average}</div>
+                    </div>`
+                    : ''
+                  }
+                  <div class="credits-character">
+                  ${credit.character}
+                  </div>
+                </div>
+              </div>
+           `;
+    document.querySelector('.credits-list').appendChild(card);
+    }
+  })
 }
 
 // Convert total minutes to hours with minutes reminder
@@ -479,6 +541,8 @@ function init() {
       break;
     case '/person-details.html':
       displayPersonDetails();
+      displayPersonImages();
+      displayPersonCredits();
       break;
     case '/search.html':
       console.log('search');
