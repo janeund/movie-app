@@ -9,6 +9,12 @@ import "./css/reset.css";
 
 const global = {
   currentPage: window.location.pathname,
+  search: {
+    term: '',
+    type: '',
+    page: 1,
+    totalPages: 1
+  },
   API_KEY: '005504cfb7e5160f459c7987f1017218',
   API_URL: 'https://api.themoviedb.org/3/',
   movieID: window.location.search.split('=')[1],
@@ -20,6 +26,15 @@ const global = {
 async function fetchAPIData(endpoint) {
   showLoader();
   const res = await fetch(`${global.API_URL}${endpoint}?api_key=${global.API_KEY}&language=en-US`);
+  const data = await res.json();
+  hideLoader();
+  return data;
+}
+
+// Search API data
+async function searchAPIData() {
+  showLoader();
+  const res = await fetch(`${global.API_URL}search/multi?api_key=${global.API_KEY}&language=en-US&query=${global.search.term}`);
   const data = await res.json();
   hideLoader();
   return data;
@@ -487,6 +502,40 @@ function initHeroSlider() {
   
 }
 
+// Search movies/shows/people
+async function search() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  console.log(urlParams);
+  global.search.term = urlParams.get('search-term');
+  const { results, total_pages, page } = await searchAPIData();
+  if (results.length === 0) {
+    document.querySelector('.search-results').innerHTML = `There is no results with ${global.search.term} query`;
+    return;
+  }
+  displaySearchResults(results);
+  console.log(results);
+}
+
+// Display search results
+function displaySearchResults(results) {
+  results.forEach(result => {
+    const mediaType = result.media_type;
+    const card = document.createElement('div');
+    card.classList.add('search-results-item', 'card');
+    card.innerHTML = `
+        <a href="${mediaType}-details.html?id=${result.id}">
+          <img class='popular-card-image' src="https://image.tmdb.org/t/p/w500/${mediaType === 'movie' || mediaType === 'tv' ? result.poster_path : result.profile_path}"
+            alt="${mediaType === 'movie' ? result.title : result.name}">
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">${result.title}</h5>
+          <p class="card-text">${result.release_date}</p>
+        </div>`;
+    document.querySelector('.search-results').appendChild(card);
+  });
+}
+
 // Show loader while loading api data
 function showLoader() {
   document.querySelector('.loader-overlay').classList.add('show');
@@ -545,7 +594,7 @@ function init() {
       displayPersonCredits();
       break;
     case '/search.html':
-      console.log('search');
+      search();
       break;
   }
 

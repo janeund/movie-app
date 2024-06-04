@@ -77,6 +77,11 @@ module.exports = {
       filename: 'person-details.html',
       template: './src/person-details.html',
     }),
+    new HtmlWebpackPlugin({
+      title: 'MSB | Shows',
+      filename: 'search.html',
+      template: './src/search.html',
+    }),
     new MiniCssExtractPlugin(),
   ],
 };
