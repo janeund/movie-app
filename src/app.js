@@ -530,7 +530,7 @@ function displaySearchResults(results) {
        result.poster_path || result.profile_path
       ? `<img class='search-results-image popular-card-image' src="https://image.tmdb.org/t/p/w500/${mediaType === 'movie' || mediaType === 'tv' ? result.poster_path : result.profile_path}"
             alt="${mediaType === 'movie' ? result.title : result.name}">`
-      : `<div class='no-image'>No image</div>`
+      : `<div class='no-image search-no-image'>No image</div>`
     }
     </a>
         <div class="card-body">
