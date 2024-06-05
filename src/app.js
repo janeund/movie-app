@@ -580,6 +580,11 @@ function displayOverlayImage(type, overlayPath) {
   }
 }
 
+// Filter search results
+function filterSearchResults() {
+  
+}
+
 // Init App
 function init() {
   switch (global.currentPage) {

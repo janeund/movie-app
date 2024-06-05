@@ -580,6 +580,21 @@ body {
 /* ----------------------------- */
 /* Search results page           */
 /* ----------------------------- */
+.search-results-filters {
+  margin-block-end: 2rem;
+}
+
+.search-results-filters-list {
+  display: flex;
+  column-gap: 1rem;
+}
+
+.search-results-filter-item {
+  border: 2px solid hsl(var(--clr-green));
+  padding: 0.2rem 0.5rem;
+  font-weight: 600;
+}
+
 .search-results {
   gap: 1rem;
 }
