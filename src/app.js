@@ -422,17 +422,18 @@ async function displayPersonImages() {
 async function displayPersonCredits() {
   const { cast } = await fetchAPIData(`person/${global.personID}/combined_credits`);
   cast.forEach(credit => {
+    const mediaType = cast.media_type;
     if (credit.title) {
       const card = document.createElement('li');
-    card.classList.add('credits-item');
-    card.innerHTML = `
-              <div class="credit-poster">
+      card.classList.add('credits-item', 'card-l');
+      card.innerHTML = `
+              <a class="credit-poster" href="${credit.media_type}-details.html?id=${credit.id}">
               ${
                 credit.poster_path 
                 ? `<img src="https://image.tmdb.org/t/p/w500/${credit.poster_path}" alt="${credit.title}">`
                 : `<div class='no-image'>No image</div>`
               }
-              </div>
+              </a>
               <div class="credit-info">
                 <div class="credits-item-top">
                   <h4 class="credits-item-title">${credit.title}</h4>
@@ -521,13 +522,17 @@ async function search() {
 function displaySearchResults(results) {
   results.forEach(result => {
     const mediaType = result.media_type;
-    const card = document.createElement('div');
-    card.classList.add('search-results-item', 'card');
+    const card = document.createElement('li');
+    card.classList.add('search-results-item', 'card-l');
     card.innerHTML = `
-        <a href="${mediaType}-details.html?id=${result.id}">
-          <img class='popular-card-image' src="https://image.tmdb.org/t/p/w500/${mediaType === 'movie' || mediaType === 'tv' ? result.poster_path : result.profile_path}"
-            alt="${mediaType === 'movie' ? result.title : result.name}">
-        </a>
+    <a class='search-results-poster' href="${mediaType}-details.html?id=${result.id}">
+    ${
+       result.poster_path || result.profile_path
+      ? `<img class='search-results-image popular-card-image' src="https://image.tmdb.org/t/p/w500/${mediaType === 'movie' || mediaType === 'tv' ? result.poster_path : result.profile_path}"
+            alt="${mediaType === 'movie' ? result.title : result.name}">`
+      : `<div class='no-image'>No image</div>`
+    }
+    </a>
         <div class="card-body">
           <h5 class="card-title">${result.title}</h5>
           <p class="card-text">${result.release_date}</p>
