@@ -521,21 +521,36 @@ async function search() {
 // Display search results
 function displaySearchResults(results) {
   results.forEach(result => {
-    const mediaType = result.media_type;
+    const mediaType = 
+    result.media_type === 'movie' || result.media_type === 'person'
+    ? result.media_type
+    : 'show';
     const card = document.createElement('li');
     card.classList.add('search-results-item', 'card-l');
     card.innerHTML = `
     <a class='search-results-poster' href="${mediaType}-details.html?id=${result.id}">
     ${
        result.poster_path || result.profile_path
-      ? `<img class='search-results-image popular-card-image' src="https://image.tmdb.org/t/p/w500/${mediaType === 'movie' || mediaType === 'tv' ? result.poster_path : result.profile_path}"
+      ? `<img class='search-results-image popular-card-image' src="https://image.tmdb.org/t/p/w500/${mediaType === 'movie' || mediaType === 'show' ? result.poster_path : result.profile_path}"
             alt="${mediaType === 'movie' ? result.title : result.name}">`
       : `<div class='no-image search-no-image'>No image</div>`
     }
     </a>
         <div class="card-body">
-          <h5 class="card-title">${result.title}</h5>
-          <p class="card-text">${result.release_date}</p>
+          <h5 class="card-title">
+          ${
+            mediaType === 'person' || mediaType === 'show'
+            ? result.name
+            : result.title
+          }
+           </h5>
+          <p class="card-text">
+          ${
+            mediaType === 'movie' ? result.release_date
+          : mediaType === 'show' ? result.first_air_date
+          : result.known_for_department
+          }
+          </p>
         </div>`;
     document.querySelector('.search-results').appendChild(card);
   });
