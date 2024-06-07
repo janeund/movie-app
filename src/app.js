@@ -507,7 +507,6 @@ function initHeroSlider() {
 async function search() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  console.log(urlParams);
   global.search.term = urlParams.get('search-term');
   const { results, total_pages, page } = await searchAPIData();
   if (results.length === 0) {
@@ -515,11 +514,11 @@ async function search() {
     return;
   }
   displaySearchResults(results);
-  console.log(results);
 }
 
 // Display search results
 function displaySearchResults(results) {
+  console.log(results);
   results.forEach(result => {
     const mediaType = 
     result.media_type === 'movie' || result.media_type === 'person'
@@ -544,13 +543,21 @@ function displaySearchResults(results) {
             : result.title
           }
            </h5>
-          <p class="card-text">
+          <div class="card-text-top">
           ${
             mediaType === 'movie' ? result.release_date
           : mediaType === 'show' ? result.first_air_date
           : result.known_for_department
           }
-          </p>
+          </div>
+          <div class="card-text-bottom">
+          ${
+            mediaType === 'movie' ||  mediaType === 'show' ? result.overview.slice(0, 20)
+          : result.known_for
+            .map(title => `<span>${title.title || title.name}</span>`)
+            .join(', ') 
+          }
+          </div>
         </div>`;
     document.querySelector('.search-results').appendChild(card);
   });
