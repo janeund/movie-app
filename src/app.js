@@ -13,19 +13,19 @@ const global = {
     term: '',
     type: '',
     page: 1,
-    totalPages: 1
+    totalPages: 1,
+    totalResults: 0
   },
-  API_KEY: '005504cfb7e5160f459c7987f1017218',
-  API_URL: 'https://api.themoviedb.org/3/',
-  movieID: window.location.search.split('=')[1],
-  showID: window.location.search.split('=')[1],
-  personID: window.location.search.split('=')[1],
+  api: {
+    API_KEY: '005504cfb7e5160f459c7987f1017218',
+    API_URL: 'https://api.themoviedb.org/3/'
+  }
 }
 
 // Fetch data from tmdb API
 async function fetchAPIData(endpoint) {
   showLoader();
-  const res = await fetch(`${global.API_URL}${endpoint}?api_key=${global.API_KEY}&language=en-US`);
+  const res = await fetch(`${global.api.API_URL}${endpoint}?api_key=${global.api.API_KEY}&language=en-US`);
   const data = await res.json();
   hideLoader();
   return data;
@@ -34,7 +34,7 @@ async function fetchAPIData(endpoint) {
 // Search API data
 async function searchAPIData() {
   showLoader();
-  const res = await fetch(`${global.API_URL}search/multi?api_key=${global.API_KEY}&language=en-US&query=${global.search.term}`);
+  const res = await fetch(`${global.api.API_URL}search/multi?api_key=${global.api.API_KEY}&language=en-US&query=${global.search.term}&page=${global.search.page}`);
   const data = await res.json();
   hideLoader();
   return data;
@@ -199,7 +199,8 @@ async function displayMovieCast() {
 
 // Display movie reviews
 async function displayMovieReviews() {
-  const { results } = await fetchAPIData(`movie/${global.movieID}/reviews`);
+  const movieID = window.location.search.split('=')[1];
+  const { results } = await fetchAPIData(`movie/${movieID}/reviews`);
   results.forEach(review => {
     const card = document.createElement('div');
     card.classList.add('review-card');
@@ -316,7 +317,8 @@ async function displayShowCast() {
 
 // Display show reviews
 async function displayShowReviews() {
-  const { results } = await fetchAPIData(`tv/${global.showID}/reviews`);
+  const showID = window.location.search.split('=')[1];
+  const { results } = await fetchAPIData(`tv/${showID}/reviews`);
   if (results.length !== 0) {
      results.forEach(review => {
     const card = document.createElement('div');
@@ -407,7 +409,8 @@ async function displayPersonDetails() {
 
 // Display person images on person details page
 async function displayPersonImages() {
-  const { profiles } = await fetchAPIData(`person/${global.personID}/images`);
+  const personID = window.location.search.split('=')[1];
+  const { profiles } = await fetchAPIData(`person/${personID}/images`);
   console.log(profiles);
   profiles.forEach(image => {
     const card = document.createElement('div');
@@ -420,7 +423,8 @@ async function displayPersonImages() {
 
 // Display person credits on person details page
 async function displayPersonCredits() {
-  const { cast } = await fetchAPIData(`person/${global.personID}/combined_credits`);
+  const personID = window.location.search.split('=')[1];
+  const { cast } = await fetchAPIData(`person/${personID}/combined_credits`);
   cast.forEach(credit => {
     const mediaType = cast.media_type;
     if (credit.title) {
@@ -508,17 +512,24 @@ async function search() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   global.search.term = urlParams.get('search-term');
-  const { results, total_pages, page } = await searchAPIData();
+  const { results, total_pages, page, total_results } = await searchAPIData();
   if (results.length === 0) {
     document.querySelector('.search-results').innerHTML = `There is no results with ${global.search.term} query`;
     return;
   }
+  global.search.page = page;
+  global.search.totalPages = total_pages;
+  global.search.totalResults = total_results;
   displaySearchResults(results);
 }
 
 // Display search results
 function displaySearchResults(results) {
-  console.log(results);
+  // Clear previous results
+  document.querySelector('.search-results').innerHTML = '';
+  document.querySelector('.search-results-heading').innerHTML = '';
+  document.querySelector('.search-pagination').innerHTML = '';
+
   results.forEach(result => {
     const mediaType = 
     result.media_type === 'movie' || result.media_type === 'person'
@@ -559,8 +570,46 @@ function displaySearchResults(results) {
           }
           </div>
         </div>`;
+    document.querySelector('.search-results-heading').innerHTML = `
+      <div>${results.length} of ${global.search.totalResults} results for ${global.search.term}</div>`;
     document.querySelector('.search-results').appendChild(card);
   });
+  displayPaginaton();
+}
+
+// Create and display pagination for search
+function displayPaginaton() {
+  const div = document.createElement('div');
+  div.classList.add('pagination');
+  div.innerHTML = `
+    <button class="btn btn-prev"><i class="fa-solid fa-arrow-left"></i></button>
+    <button class="btn btn-next"><i class="fa-solid fa-arrow-right"></i></button>
+    <div class="page-counter">Page ${global.search.page} of ${global.search.totalPages}</div>`;
+    document.querySelector('.search-pagination').appendChild(div);  
+
+    // Disable prev button if on first page
+    if (global.search.page === 1) {
+      document.querySelector('.btn-prev').disabled = true;
+    }
+
+    // Disable next button if on last page
+    if (global.search.page === global.search.totalPages) {
+      document.querySelector('.btn-next').disabled = true;
+    }
+
+    // Next page
+    document.querySelector('.btn-next').addEventListener('click', async () => {
+      global.search.page++;
+      const { results, total_pages } = await searchAPIData();
+      displaySearchResults(results);
+    });
+
+    // Prev page
+    document.querySelector('.btn-prev').addEventListener('click', async () => {
+      global.search.page--;
+      const { results, total_pages } = await searchAPIData();
+      displaySearchResults(results);
+    });
 }
 
 // Show loader while loading api data
