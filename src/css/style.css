@@ -13,11 +13,19 @@
   --rounded: 0.4rem;
 }
 
+/* Set height for html to press the footer to the bottom of the screen */
+html {
+  height: 100%;
+}
+
 /* set up the body */
 body {
   font-family: 'Reddit Mono', sans-serif;
   background-color: hsl(var(--clr-gray));
   color: hsl(var(--clr-light));
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100%;
 }
 
 /* ------------------- */
@@ -64,6 +72,7 @@ body {
   position: relative;
   height: 2.5rem;
   padding: 0.7rem;
+  color: hsl(var(--clr-light));
   background-color: hsla(var(--clr-glass), .10);
   border-radius: var(--rounded);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -239,9 +248,8 @@ body {
   border-radius: 1.2rem;
 }
 
-.filter-item-selected {
-
-}
+/* .filter-item-selected {
+} */
 
 .reset-filters {
   background: transparent;
@@ -345,10 +353,11 @@ body {
 /* ----------------------------- */
 /* Popular movies and shows page */
 /* ----------------------------- */
-.popular-wrapper{
+.popular-wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   gap: 1.5rem;
+  margin-block-end: 5rem;
 }
 
 .popular-card-image {
@@ -690,12 +699,21 @@ body {
 
 .search-results-image {
   height: 101%;
-  border-radius: var(--rounded);
-  
+  border-radius: var(--rounded); 
 }
 
 .no-image.search-no-image {
   font-size: 0.6rem;
+}
+
+.footer {
+  min-height: 7rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-weight: 300;
+  font-size: 0.85rem;
+  background-color: hsla(0, 0%, 100%, .1);
 }
 
 /* ----------------------------- */
