@@ -73,11 +73,22 @@ async function displayHeroSlider() {
       <div class="learn-more-btn">
         <a class="btn more-btn" href="movie-details.html?id=${item.id}">Learn More</a>
       </div>
-      
     </div>
     `;
     document.querySelector('.hero-slider').appendChild(div);
   });
+  const controls = document.createElement('div');
+  controls.classList.add('slider-controls')
+  controls.innerHTML = `
+  <button class='btn slider-btn slider-btn-prev'><i class="fa-solid fa-arrow-left"></i></button>
+  <div class='control-dots-container'>
+    <div class="control-dot"></div>
+    <div class="control-dot"></div>
+    <div class="control-dot"></div>
+  </div>
+  <button class='btn slider-btn slider-btn-next'><i class="fa-solid fa-arrow-right"></i></button>
+  `
+  document.querySelector('.hero-slider').appendChild(controls)
   initHeroSlider();
 }
 
@@ -488,6 +499,8 @@ function hightlightActiveLink() {
 // Init hero slideshow
 function initHeroSlider() {
   let slideIndex = 0;
+  const prevBtn = document.querySelector('.slider-btn-prev');
+  const nextBtn = document.querySelector('.slider-btn-next');
   showSlides();
   function showSlides() {
     let slides = document.querySelectorAll('.trending-item');
@@ -500,7 +513,8 @@ function initHeroSlider() {
   }
   slides[slideIndex - 1].style.display = "block";
   }
-  setInterval(showSlides, 7000)
+  setInterval(showSlides, 7000);
+  
 }
 
 // Search movies/shows/people

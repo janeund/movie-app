@@ -99,6 +99,25 @@ body {
 /* ------------------- */
 /* Common components   */
 /* ------------------- */
+/* Button */
+.btn {
+  display: inline-flex;
+  color: hsl(var(--clr-light));
+  border: none;
+  align-items: center;
+  background-color: hsl(var(--clr-green));
+  padding: 0.6rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-shadow: hsl(var(--clr-light)) 1px 0 10px;
+  border-radius: var(--rounded);
+}
+
+.fa-chevron-left {
+  font-size: 0.6rem;
+  padding-right: 0.3rem;
+}
+
 /* Main title for pages */
 .title-page {
   font-size: 3rem;
@@ -328,8 +347,45 @@ body {
 .hero-item-overview {
   font-size: 0.8rem;
   font-weight: 300;
-  text-shadow: #21242D 1px 0 10px;;
+  text-shadow: #21242D 1px 0 10px;
   margin-bottom: 1rem;
+}
+
+.slider-controls {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 2rem;
+  z-index: 10;
+  top: 80%;
+  left: 50%;
+  width: 5rem;
+  height: 5rem;
+}
+
+.control-dots-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.control-dot {
+  border-radius: 2px;
+  width: 2rem;
+  height: 0.3rem;
+  background-color: hsl(var(--clr-glass), .42);
+}
+
+.control-dot-active {
+  background-color: hsla(var(--clr-glass), .82);
+}
+
+.slider-btn {
+  background-color: hsla(var(--clr-light), .40);
+  box-shadow: 0 1px 5px rgba(255, 255, 255, 0.5);
+  text-shadow: #21242D 1px 0 10px;
 }
 
 .top-header {
@@ -421,24 +477,6 @@ body {
 .back-home {
   height: 2rem;
   margin-block: 2rem;
-}
-
-.btn {
-  display: inline-flex;
-  color: hsl(var(--clr-light));
-  border: none;
-  align-items: center;
-  background-color: hsl(var(--clr-green));
-  padding: 0.6rem;
-  font-weight: 600;
-  font-size: 0.8rem;
-  text-shadow: hsl(var(--clr-light)) 1px 0 10px;
-  border-radius: var(--rounded);
-}
-
-.fa-chevron-left {
-  font-size: 0.6rem;
-  padding-right: 0.3rem;
 }
 
 /* Overlay image */
@@ -758,7 +796,7 @@ body {
 /* Utility classes               */
 /* ----------------------------- */
 .container {
-  max-width: 90rem;
+  max-width: 80rem;
   width: 100%;
   margin-inline: auto;
   padding-inline: 1.5rem;
