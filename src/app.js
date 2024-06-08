@@ -43,11 +43,15 @@ async function searchAPIData() {
 // Display hero slider
 async function displayHeroSlider() {
   // const imageUrl = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
-  const { results } = await fetchAPIData('trending/all/week');
-  const { genres } = await fetchAPIData('genre/tv/list');
-  // console.log(genres);
+  const tv = await fetchAPIData('trending/tv/week');
+  const movie = await fetchAPIData('trending/movie/week');
+  const trending = Object.values({...tv.results, ...movie.results});
+  console.log(trending);
+  const genresTv = await fetchAPIData('genre/tv/list');
+  const genresMovie = await fetchAPIData('genre/movie/list');
+  const genres = Object.values({...genresTv.genres, ...genresMovie.genres});
   
-  results.slice(0, 1).forEach(item => {
+  trending.slice(0, 1).forEach(item => {
     const div = document.createElement('div');
     div.classList.add('trending-item');
     div.innerHTML = `
@@ -64,12 +68,7 @@ async function displayHeroSlider() {
           <div class="vote-total">(${(item.vote_count / 1000).toFixed(1)}k)</div>
         </li>
         <li class="genres-hero">
-          <div class="details-genres">
-            <ul class="genres">
-              ${ console.log()
-              }
-            </ul>
-          </div>
+          
         </li>
       </ul>
       <p class="hero-item-overview">${item.overview}</p>

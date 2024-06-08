@@ -276,6 +276,16 @@ body {
   background-color: var(--clr-glass);
 }
 
+.hero-slider:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to left, transparent 0, hsl(var(--clr-dark)) 100%);
+}
+
 .trending-item {
   position: absolute;
   height: 100%;
@@ -285,6 +295,7 @@ body {
 
 .trending-image-container {
   height: 100%;
+  background-size: cover; 
 }
 
 .trending-item-img {
@@ -349,6 +360,30 @@ body {
   font-size: 0.6rem;
   margin-left: 0.4rem;
 } 
+
+.slider-thumbnails {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  top: 35%;
+  right: 15%;
+  z-index: 100;
+}
+
+.thumbnail-item {
+  width: 8rem;
+  height: 12rem;
+  background-color: aliceblue;
+  filter: brightness(0.5);
+  transition: 0.5s;
+}
+
+.tumbnail-active {
+  width: 12rem;
+  height: 16rem;
+  filter: brightness(1);
+}
 
 /* ----------------------------- */
 /* Popular movies and shows page */
