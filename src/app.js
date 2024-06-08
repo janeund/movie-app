@@ -47,11 +47,11 @@ async function displayHeroSlider() {
   const movie = await fetchAPIData('trending/movie/week');
   const trending = Object.values({...tv.results, ...movie.results});
   console.log(trending);
-  const genresTv = await fetchAPIData('genre/tv/list');
-  const genresMovie = await fetchAPIData('genre/movie/list');
-  const genres = Object.values({...genresTv.genres, ...genresMovie.genres});
+  // const genresTv = await fetchAPIData('genre/tv/list');
+  // const genresMovie = await fetchAPIData('genre/movie/list');
+  // const genres = Object.values({...genresTv.genres, ...genresMovie.genres});
   
-  trending.slice(0, 1).forEach(item => {
+  trending.forEach(item => {
     const div = document.createElement('div');
     div.classList.add('trending-item');
     div.innerHTML = `
@@ -67,9 +67,7 @@ async function displayHeroSlider() {
           <div class="rating">${item.vote_average.toFixed(1)} / 10 </div>
           <div class="vote-total">(${(item.vote_count / 1000).toFixed(1)}k)</div>
         </li>
-        <li class="genres-hero">
-          
-        </li>
+        
       </ul>
       <p class="hero-item-overview">${item.overview}</p>
       <div class="learn-more-btn">
@@ -80,7 +78,7 @@ async function displayHeroSlider() {
     `;
     document.querySelector('.hero-slider').appendChild(div);
   });
-  // initHeroSlider();
+  initHeroSlider();
 }
 
 // Display top rated movies on home page slider
@@ -493,17 +491,16 @@ function initHeroSlider() {
   showSlides();
   function showSlides() {
     let slides = document.querySelectorAll('.trending-item');
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = 'none';
-  }
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = 'none';
+    }
   slideIndex++;
   if (slideIndex > slides.length) {
     slideIndex = 1;
   }
   slides[slideIndex - 1].style.display = "block";
-  setTimeout(showSlides, 4000)
   }
-  
+  setInterval(showSlides, 7000)
 }
 
 // Search movies/shows/people
