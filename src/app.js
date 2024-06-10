@@ -501,9 +501,9 @@ function initHeroSlider() {
   let slideIndex = 0;
   const prevBtn = document.querySelector('.slider-btn-prev');
   const nextBtn = document.querySelector('.slider-btn-next');
+  let slides = document.querySelectorAll('.trending-item');
   showSlides();
   function showSlides() {
-    let slides = document.querySelectorAll('.trending-item');
     for (let i = 0; i < slides.length; i++) {
       slides[i].style.display = 'none';
     }
@@ -514,7 +514,7 @@ function initHeroSlider() {
   slides[slideIndex - 1].style.display = "block";
   }
   setInterval(showSlides, 7000);
-  
+  nextBtn.addEventListener('click', showSlides)
 }
 
 // Search movies/shows/people

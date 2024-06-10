@@ -283,14 +283,21 @@ body {
 /* ------------------- */
 
 /* Hero slider */
-/* .hero-container {
+.hero-container {
   
-} */
+}
+
+.trending-item {
+ 
+}
 
 .hero-slider {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  height: 30rem;
+  height: 40rem;
   border-radius: var(--rounded);
   background-color: var(--clr-glass);
   
@@ -306,10 +313,6 @@ body {
   background: linear-gradient(to bottom, transparent 0, hsl(var(--clr-gray)) 100%);
 }
 
-/* .trending-item {
-  
-} */
-
 .trending-image-container {
   height: 100%;
   background-size: cover; 
@@ -319,7 +322,6 @@ body {
   height: 100%;
   width: 100%;
   border-radius: var(--rounded);
-  z-index: -1;
   opacity: 0.6;
   background-color: var(--clr-glass);
 }
@@ -332,34 +334,35 @@ body {
   flex-direction: column;
   justify-content: center;
   max-width: 50rem;
+  height: 20rem;
   z-index: 1;
   color: hsl(var(--clr-light));
-  top: 20%;
-  left: 20%;
+  top: 15%;
+  left: 18%;
 }
 
 .hero-item-title {
-  font-size: 2rem;
+  font-size: 2.4rem;
   font-weight: 700;
   text-shadow: #21242D 1px 0 10px;
 }
 
 .hero-item-overview {
-  font-size: 0.8rem;
   font-weight: 300;
   text-shadow: #21242D 1px 0 10px;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .slider-controls {
   position: absolute;
+  width: 50rem;
   display: flex;
   align-items: center;
   justify-content: center;
   column-gap: 2rem;
   z-index: 10;
-  top: 80%;
-  left: 50%;
+  top: 70%;
+  left: 47.2%;
   width: 5rem;
   height: 5rem;
 }
@@ -484,7 +487,8 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 120%;
+  
+  height: 100%;
   width: 100vw;
   position: absolute;
   top: 0;
