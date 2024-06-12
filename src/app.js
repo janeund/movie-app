@@ -513,7 +513,7 @@ function initHeroSlider() {
   }
   slides[slideIndex - 1].style.display = "block";
   }
-  setInterval(showSlides, 7000);
+  // setInterval(showSlides, 7000);
   nextBtn.addEventListener('click', showSlides)
 }
 
