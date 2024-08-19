@@ -1,12 +1,6 @@
 import "./css/style.css";
 import "./css/reset.css";
 
-// function addImage(container) {
-//   const img = document.createElement('img');
-//   img.src = userIcon;
-//   document.querySelector(container).appendChild(img);
-// }
-
 const global = {
   currentPage: window.location.pathname,
   search: {
