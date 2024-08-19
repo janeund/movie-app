@@ -678,7 +678,7 @@ function init() {
       displayPersonImages();
       displayPersonCredits();
       break;
-    case '/search':
+    case '/search.html':
       search();
       break;
   }
