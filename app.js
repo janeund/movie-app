@@ -654,7 +654,7 @@ function init() {
       displayTopMovies();
       displayTopSeries();
       break;
-    case '/movie-details':
+    case '/movie-details.html':
       displayMovieDetails();
       displayMovieCast();
       displayMovieReviews();
@@ -662,7 +662,7 @@ function init() {
     case '/movies':
       displayPopularMovies();
       break;
-    case '/show-details':
+    case '/show-details.html':
       displayShowDetails();
       displayShowCast();
       displayShowReviews();
@@ -673,7 +673,7 @@ function init() {
     case '/people':
       displayPopularPeople();
       break;
-    case '/person-details':
+    case '/person-details.html':
       displayPersonDetails();
       displayPersonImages();
       displayPersonCredits();
