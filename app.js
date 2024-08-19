@@ -649,12 +649,12 @@ console.log(global.currentPage);
 function init() {
   switch (global.currentPage) {
     case '/':
-    case '/index.html':
+    case '/index':
       displayHeroSlider();
       displayTopMovies();
       displayTopSeries();
       break;
-    case '/movie-details.html':
+    case '/movie-details':
       displayMovieDetails();
       displayMovieCast();
       displayMovieReviews();
@@ -662,23 +662,23 @@ function init() {
     case '/movies':
       displayPopularMovies();
       break;
-    case '/show-details.html':
+    case '/show-details':
       displayShowDetails();
       displayShowCast();
       displayShowReviews();
       break;
-    case '/shows.html':
+    case '/shows':
       displayPopularShows();
       break;
-    case '/people.html':
+    case '/people':
       displayPopularPeople();
       break;
-    case '/person-details.html':
+    case '/person-details':
       displayPersonDetails();
       displayPersonImages();
       displayPersonCredits();
       break;
-    case '/search.html':
+    case '/search':
       search();
       break;
   }
