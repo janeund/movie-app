@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <script defer src="app.js"></script>
   <title>
     home
   </title>
@@ -55,17 +58,20 @@
   </header>
   <main class="main-content">
     <div class="container">
-      <h1 class="movies-title popular-title title-page">Popular movies</h1>
-      <div class="movies-filters filters">
-        <ul class="movies-filters-list filters-list">
-          <li class="movies-filter-item filter-item">Sort</li>
-          <li class="movies-filter-item filter-item">Genre</li>
-          <li class="movies-filter-item filter-item">Sort</li>
-          <li class="movies-filter-item filter-item">Production company</li>
-        </ul>
-        <button class="reset-filters">Reset filters</button>
-      </div>
-      <div class="popular-movies-wrapper popular-wrapper"></div>
+      <section class="search-results-wrapper section-mb">
+        <h1 class="search-results-title title-page">Search results</h1>
+        <div class="search-results-filters">
+          <ul class="search-results-filters-list">
+            <li class="search-results-filter-item search-filter-item-selected">All</li>
+            <li class="search-results-filter-item">Movies</li>
+            <li class="search-results-filter-item">TV Shows</li>
+            <li class="search-results-filter-item">Celebritites</li>
+          </ul>
+        </div>
+        <div class="search-results-heading"></div>
+        <ul class="search-results section-list-l"></ul>
+        <div class="search-pagination"></div>
+      </section>
     </div>
   </main>
   <footer class="footer">
@@ -75,6 +81,7 @@
       </p>
     </div>
   </footer>
+
   <div class="loader-overlay">
     <div class="loader"></div>
   </div>

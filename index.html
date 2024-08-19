@@ -10,7 +10,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>Document</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <script defer src="app.js"></script>
+  <title>
+    Home Page | MSB
+  </title>
 </head>
 
 <body>
@@ -52,31 +57,45 @@
     </div>
   </header>
   <main class="main-content">
-    <div class="container show-details-container">
-      <div class="back-home">
-        <a class="btn btn-back" href="/index.html"><i class="fa-solid fa-chevron-left"></i>Back To Home Page</a>
-      </div>
-      <section class="show-details section-mb">
+    <div class="container">
+      <section class="hero-showcase section-mb">
+        <div class="hero-container">
+          <div class="hero-slider">
 
-      </section>
 
-      <section class="show-cast section-mb">
-        <h4 class="details-title-secondary">Top Cast</h4>
-        <div class="details-cast slider-container">
+          </div>
 
         </div>
-        <!-- <div class="details-similar">
-            <h3>More Like This</h3>
-            <div class="similar-container slider-container">
-              <div class="similar-card"></div>
-            </div>
-          </div> -->
-
+        <!-- <div class="hero-text">
+          <h1>Now Trending</h1>
+          <img class="hero-image" src="https://picsum.photos/id/1038/600/400" alt="">
+        </div> -->
       </section>
+      <section class="top-movies section-mb">
+        <div class="top-movies-header top-header">
+          <h2 class="top-movies-title top-title">Top-rated movies</h2>
+          <a class="top-movies-all btn-all" href="/movies.html">view all
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </div>
+        <div class="top-movies-slider slider">
+          <div class="slider-container top-movies-slider-container">
 
-      <section class="details-reviews section-mb">
-        <h4 class="details-title-secondary">User reviews</h4>
-        <div class="reviews-container slider-container"></div>
+          </div>
+        </div>
+      </section>
+      <section class="top-series section-mb">
+        <div class="top-series-header top-header">
+          <h2 class="top-series-title top-title">Top-rated TV series</h2>
+          <a class="top-series-all btn-all" href="/shows.html">view all
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </div>
+        <div class="top-series-slider slider">
+          <div class="slider-container top-series-slider-container">
+
+          </div>
+        </div>
       </section>
     </div>
   </main>

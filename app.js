@@ -1,6 +1,3 @@
-import "./css/style.css";
-import "./css/reset.css";
-
 const global = {
   currentPage: window.location.pathname,
   search: {

@@ -10,9 +10,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>
-    home
-  </title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <script defer src="app.js"></script>
+  <title>Document</title>
+
 </head>
 
 <body>
@@ -54,20 +56,26 @@
     </div>
   </header>
   <main class="main-content">
-    <div class="container">
-      <section class="search-results-wrapper section-mb">
-        <h1 class="search-results-title title-page">Search results</h1>
-        <div class="search-results-filters">
-          <ul class="search-results-filters-list">
-            <li class="search-results-filter-item search-filter-item-selected">All</li>
-            <li class="search-results-filter-item">Movies</li>
-            <li class="search-results-filter-item">TV Shows</li>
-            <li class="search-results-filter-item">Celebritites</li>
+    <div class="container person-details-container">
+      <div class="back-home">
+        <a class="btn btn-back" href="/index.html"><i class="fa-solid fa-chevron-left"></i>Back To Home Page</a>
+      </div>
+      <section class="person-details section-mb">
+
+      </section>
+      <section class="person-photos section-mb">
+        <h4 class="details-title-secondary">Photos</h4>
+        <div class="photos-container slider-container">
+
+        </div>
+      </section>
+      <section class="person-photos section-mb">
+        <h4 class="details-title-secondary">Credits</h4>
+        <div class="credits-container">
+          <ul class="credits-list section-list-l">
+
           </ul>
         </div>
-        <div class="search-results-heading"></div>
-        <ul class="search-results section-list-l"></ul>
-        <div class="search-pagination"></div>
       </section>
     </div>
   </main>
@@ -78,7 +86,6 @@
       </p>
     </div>
   </footer>
-
   <div class="loader-overlay">
     <div class="loader"></div>
   </div>
