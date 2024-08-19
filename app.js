@@ -659,7 +659,7 @@ function init() {
       displayMovieCast();
       displayMovieReviews();
       break;
-    case '/movies.html':
+    case '/movies':
       displayPopularMovies();
       break;
     case '/show-details.html':
