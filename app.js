@@ -642,6 +642,9 @@ function filterSearchResults() {
   
 }
 
+console.log(global.currentPage);
+
+
 // Init App
 function init() {
   switch (global.currentPage) {
