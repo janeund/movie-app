@@ -649,6 +649,7 @@ console.log(global.currentPage);
 function init() {
   switch (global.currentPage) {
     case '/':
+    case '/index':
     case '/index.html':
       displayHeroSlider();
       displayTopMovies();
@@ -659,6 +660,7 @@ function init() {
       displayMovieCast();
       displayMovieReviews();
       break;
+    case '/movies':
     case '/movies.html':
       displayPopularMovies();
       break;
@@ -667,9 +669,11 @@ function init() {
       displayShowCast();
       displayShowReviews();
       break;
+    case '/shows':
     case '/shows.html':
       displayPopularShows();
       break;
+    case '/people':
     case '/people.html':
       displayPopularPeople();
       break;
