@@ -1,0 +1,10 @@
+TODO:
+1. responsiviness
+2. sizes of cards and fonts
+3. interactive search bar
+4. load more at least for actor's movies
+5. overview limit with button learn more
+
+
+problems i have been encountered with:
+1. initialize multiplie swiper sliders on the page so they can work seperately

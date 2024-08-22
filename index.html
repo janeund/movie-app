@@ -13,6 +13,8 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./lib/swiper-bundle.min.css">
+  <script src="./lib/swiper-bundle.min.js"></script>
   <title>
     Home Page | MSB
   </title>
@@ -59,11 +61,14 @@
   <main class="main-content">
     <div class="container">
       <section class="hero-showcase section-mb">
-        <div class="hero-container">
-          <div class="hero-slider">
+        <div class="hero-container swiper">
+          <div class="hero-slider swiper-wrapper">
 
 
           </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
 
         </div>
         <!-- <div class="hero-text">
@@ -78,10 +83,13 @@
             <i class="fa-solid fa-chevron-right"></i>
           </a>
         </div>
-        <div class="top-movies-slider slider">
-          <div class="slider-container top-movies-slider-container">
+        <div class="top-movies-slider slider swiper" id="s1">
+          <div class="slider-container top-movies-slider-container swiper-wrapper">
 
           </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
         </div>
       </section>
       <section class="top-series section-mb">
@@ -91,10 +99,13 @@
             <i class="fa-solid fa-chevron-right"></i>
           </a>
         </div>
-        <div class="top-series-slider slider">
-          <div class="slider-container top-series-slider-container">
+        <div class="top-series-slider slider swiper" id="s2">
+          <div class="slider-container top-series-slider-container swiper-wrapper">
 
           </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
         </div>
       </section>
     </div>

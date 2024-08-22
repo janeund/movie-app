@@ -37,14 +37,9 @@ async function displayHeroSlider() {
   const tv = await fetchAPIData('trending/tv/week');
   const movie = await fetchAPIData('trending/movie/week');
   const trending = Object.values({...tv.results, ...movie.results});
-  console.log(trending);
-  // const genresTv = await fetchAPIData('genre/tv/list');
-  // const genresMovie = await fetchAPIData('genre/movie/list');
-  // const genres = Object.values({...genresTv.genres, ...genresMovie.genres});
-  
   trending.forEach(item => {
     const div = document.createElement('div');
-    div.classList.add('trending-item');
+    div.classList.add('trending-item', 'swiper-slide');
     div.innerHTML = `
     <div class="trending-image-container">
       <img class="trending-item-img" src="https://image.tmdb.org/t/p/original/${item.backdrop_path}">
@@ -68,18 +63,6 @@ async function displayHeroSlider() {
     `;
     document.querySelector('.hero-slider').appendChild(div);
   });
-  const controls = document.createElement('div');
-  controls.classList.add('slider-controls')
-  controls.innerHTML = `
-  <button class='btn slider-btn slider-btn-prev'><i class="fa-solid fa-arrow-left"></i></button>
-  <div class='control-dots-container'>
-    <div class="control-dot"></div>
-    <div class="control-dot"></div>
-    <div class="control-dot"></div>
-  </div>
-  <button class='btn slider-btn slider-btn-next'><i class="fa-solid fa-arrow-right"></i></button>
-  `
-  document.querySelector('.hero-slider').appendChild(controls)
   initHeroSlider();
 }
 
@@ -88,7 +71,7 @@ async function displayTopMovies() {
   const { results } = await fetchAPIData('movie/top_rated');
   results.forEach(movie => {
     const card = document.createElement('div');
-    card.classList.add('top-movies-card', 'card');
+    card.classList.add('top-movies-card', 'card', 'swiper-slide');
     card.innerHTML = ` 
     <a href="movie-details.html?id=${movie.id}">
       <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
@@ -99,6 +82,7 @@ async function displayTopMovies() {
     </div>`;
     document.querySelector('.top-movies-slider-container').appendChild(card);
   });
+  initSwiper();
 }
 
 // Display top rated series on home page slider
@@ -106,7 +90,7 @@ async function displayTopSeries() {
   const { results } = await fetchAPIData('tv/top_rated');
   results.forEach(tv => {
     const card = document.createElement('div');
-    card.classList.add('top-series-card', 'card');
+    card.classList.add('top-series-card', 'card', 'swiper-slide');
     card.innerHTML = ` 
     <a href="show-details.html?id=${tv.id}">
       <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${tv.poster_path}" alt="${tv.name}">
@@ -117,6 +101,7 @@ async function displayTopSeries() {
     </div>`;
     document.querySelector('.top-series-slider-container').appendChild(card);
   });
+  initSwiper();
 }
 
 // Display popular movies
@@ -383,7 +368,11 @@ async function displayPersonDetails() {
   personInner.innerHTML = `
   <div class="details-top">
     <div class="details-poster">
-      <img src="https://image.tmdb.org/t/p/w500/${person.profile_path}" alt="${person.name}">
+    ${
+      person.profile_path 
+      ? `<img src="https://image.tmdb.org/t/p/w500/${person.profile_path}" alt="${person.name}">`
+      : `<div class='no-image-big'><img src="./assets/actor.svg" alt="${person.name}"></div>`
+    }
     </div>
     <div class="details-info">
       <h3 class="details-title-main">${person.name}</h3>
@@ -394,16 +383,42 @@ async function displayPersonDetails() {
       </ul>
       <div class="details-overview">
         <h4 class="details-title-secondary">Biography</h4>
-        <p class="details-overview-text">${person.biography}</p>
+        <p class="details-overview-text person">
+        ${
+          person.biography
+          ? person.biography
+          : `We don't have a biography for ${person.name}.`
+        }
+        </p>
+        ${
+          person.biography
+          ? "<button class='btn read-more' type='button'>Read More</button>"
+          : ""
+        }
       </div>
-    <div class="details-genres">
-      <h4 class="details-title-secondary">Genres</h4>
-      <ul class="genres"> 
-      </ul>
-    </div>
     </div>
   </div>`;
   document.querySelector('.person-details').appendChild(personInner);
+  `${
+    person.biography
+    ? readMoreBiography()
+    : ''
+  }`
+}
+
+// Read more button for biography expansion 
+function readMoreBiography() {
+  const readMoreBtn = document.querySelector('.read-more');
+  const contentBox = document.querySelector('.details-overview-text.person');
+  readMoreBtn.addEventListener('click', () => {
+    contentBox.classList.toggle('active');
+    readMoreBtn.classList.toggle('active');
+    if (readMoreBtn.classList.contains('active')) {
+      readMoreBtn.textContent = 'Read Less';
+    } else {
+      readMoreBtn.textContent = 'Read More'
+    }
+  })
 }
 
 // Display person images on person details page
@@ -411,13 +426,19 @@ async function displayPersonImages() {
   const personID = window.location.search.split('=')[1];
   const { profiles } = await fetchAPIData(`person/${personID}/images`);
   console.log(profiles);
-  profiles.forEach(image => {
-    const card = document.createElement('div');
-    card.classList.add('photo');
-    card.innerHTML = `
-      <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${image.file_path}" alt="profile">`;
-    document.querySelector('.photos-container').appendChild(card);
-  })
+  if (profiles.length > 0) {
+    profiles.forEach(image => {
+      const card = document.createElement('div');
+      card.classList.add('photo', 'swiper-slide');
+      card.innerHTML = `
+        <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${image.file_path}" alt="profile">`;
+      document.querySelector('.photos-container').appendChild(card);
+    })
+    initSwiper();
+  } else {
+    document.querySelector('.photos-container').innerHTML = 'Unfortunately, there is no available photos yet.'
+  }
+ 
 }
 
 // Display person credits on person details page
@@ -489,23 +510,24 @@ function hightlightActiveLink() {
 
 // Init hero slideshow
 function initHeroSlider() {
-  let slideIndex = 0;
-  const prevBtn = document.querySelector('.slider-btn-prev');
-  const nextBtn = document.querySelector('.slider-btn-next');
-  let slides = document.querySelectorAll('.trending-item');
-  showSlides();
-  function showSlides() {
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = 'none';
+  const heroSlider = new Swiper('.hero-container', {
+    //  direction: "horizontal",
+    // slidesPerView: 1,
+    // centeredSlides: true,
+    // loop: true,
+    effect: "fade",
+	  fadeEffect: {
+		  crossFade: true
+	  },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
     }
-  slideIndex++;
-  if (slideIndex > slides.length) {
-    slideIndex = 1;
-  }
-  slides[slideIndex - 1].style.display = "block";
-  }
-  // setInterval(showSlides, 7000);
-  nextBtn.addEventListener('click', showSlides)
+    // effect: "fade",
+    // fadeEffect: {
+    //   crossFade: true
+    // }
+  }) 
 }
 
 // Search movies/shows/people
@@ -638,12 +660,48 @@ function displayOverlayImage(type, overlayPath) {
 }
 
 // Filter search results
-function filterSearchResults() {
+// function filterSearchResults() {
   
+// }
+
+function initSwiper() {
+  const sliders = document.querySelectorAll('.swiper');
+  for (let slide of sliders) {
+    const nextEl = slide.querySelectorAll('.swiper-button-next')[0];
+    const prevEl = slide.querySelectorAll('.swiper-button-prev')[0];
+    const pagination = slide.querySelectorAll('.swiper-pagination')[0];
+    let carousel = new Swiper(slide, {
+      slidesPerView: 6,
+      loop: true,
+        navigation: {
+            nextEl,
+            prevEl,
+        },
+        pagination: {
+          el: pagination,
+          clickable: true,
+        },
+    });
+  }
+
+  // swiperElements.forEach((slider, index) => {
+  //   let sliderLength = slider.children[0].children.length;
+  //   let result = (sliderLength > 1) ? true : false;
+  //   const swiper = new Swiper(`#${swiperEl.id}`,{
+  //     slidesPerView: 6,
+  //     loop: true,
+  //     // spaceBetween: 30,
+  //     // pagination: {
+  //     //   el: `.swiper-pagination-${swiperID}`,
+  //     //   clickable: true,
+  //     // },
+  //     navigation: {
+  //       nextEl: '.swiper-button-next'[index],
+  //       prevEl: `.swiper-button-prev-${swiperID}`
+  //     }
+  //   });
+  // })
 }
-
-console.log(global.currentPage);
-
 
 // Init App
 function init() {
