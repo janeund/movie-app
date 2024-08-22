@@ -126,6 +126,7 @@ body {
   margin-bottom: 1rem;
 }
 
+
 /* Slider */
 .slider-container {
   display: flex;
@@ -134,9 +135,6 @@ body {
   /* overflow: hidden; */
 }
 
-.swiper-pagination {
-  position: default;
-}
 
 /* Mini card common styles */
 .card {
@@ -295,7 +293,7 @@ body {
 }
 
 .trending-item {
- 
+  width: 40rem;
 }
 
 .hero-slider {
@@ -303,7 +301,7 @@ body {
   background-color: var(--clr-glass);
 }
 
-.hero-slider:after {
+.trending-image-container:after {
   content: '';
   position: absolute;
   top: 0;
@@ -314,13 +312,16 @@ body {
 }
 
 .trending-image-container {
+  position: relative;
   height: 100%;
   background-size: cover; 
 }
 
 .trending-item-img {
+  display: block;
   height: 100%;
   width: 100%;
+  object-fit: cover;
   border-radius: var(--rounded);
   opacity: 0.6;
   background-color: var(--clr-glass);

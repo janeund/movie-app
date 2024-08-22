@@ -36,7 +36,7 @@ async function displayHeroSlider() {
   // const imageUrl = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
   const tv = await fetchAPIData('trending/tv/week');
   const movie = await fetchAPIData('trending/movie/week');
-  const trending = Object.values({...tv.results, ...movie.results});
+  const trending = Object.values({...tv.results, ...movie.results}).slice(0,5);
   trending.forEach(item => {
     const div = document.createElement('div');
     div.classList.add('trending-item', 'swiper-slide');
@@ -168,7 +168,7 @@ async function displayMovieCast() {
   const actors = cast.filter(actor => actor.known_for_department === 'Acting').slice(0, 10);
   actors.forEach(actor => {
     const card = document.createElement('div');
-    card.classList.add('card');
+    card.classList.add('card', 'swiper-slide');
     card.innerHTML = `
       <a href="person-details.html?id=${actor.id}">
         <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${actor.profile_path}" alt="${actor.name}">
@@ -179,6 +179,7 @@ async function displayMovieCast() {
       </div>`;
   document.querySelector('.details-cast').appendChild(card);
   });
+  initSwiper();
 }
 
 // Display movie reviews
@@ -187,7 +188,7 @@ async function displayMovieReviews() {
   const { results } = await fetchAPIData(`movie/${movieID}/reviews`);
   results.forEach(review => {
     const card = document.createElement('div');
-    card.classList.add('review-card');
+    card.classList.add('review-card', 'swiper-slide');
     card.innerHTML = `
         <div class="review-card-header">
           <div class="review-card-avatar">
@@ -214,7 +215,8 @@ async function displayMovieReviews() {
           <div class="review-date">${new Date(review.created_at).toLocaleDateString('en-US')}</div>
         </div>`;
       document.querySelector('.reviews-container').appendChild(card);
-  })
+  });
+  initSwiper();
 }
 
 // Display popular shows
@@ -283,7 +285,7 @@ async function displayShowCast() {
   if (actors.length !== 0) {
     actors.forEach(actor => {
       const card = document.createElement('div');
-      card.classList.add('card');
+      card.classList.add('card', 'swiper-slide');
       card.innerHTML = `
         <a href="person-details.html?id=${actor.id}">
           <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${actor.profile_path}" alt="${actor.name}">
@@ -294,6 +296,7 @@ async function displayShowCast() {
         </div>`;
     document.querySelector('.details-cast').appendChild(card);
     });
+    initSwiper();
   } else {
     document.querySelector('.show-cast').style.display = 'none';
   }
@@ -306,7 +309,7 @@ async function displayShowReviews() {
   if (results.length !== 0) {
      results.forEach(review => {
     const card = document.createElement('div');
-    card.classList.add('review-card');
+    card.classList.add('review-card', 'swiper-slide');
     card.innerHTML = `
         <div class="review-card-header">
           <div class="review-card-avatar">
@@ -334,6 +337,7 @@ async function displayShowReviews() {
         </div>`;
       document.querySelector('.reviews-container').appendChild(card);
   })
+  initSwiper();
   } else {
     document.querySelector('.details-reviews').style.display = 'none';
   }
@@ -511,19 +515,27 @@ function hightlightActiveLink() {
 // Init hero slideshow
 function initHeroSlider() {
   const heroSlider = new Swiper('.hero-container', {
-    //  direction: "horizontal",
-    // slidesPerView: 1,
-    // centeredSlides: true,
-    // loop: true,
+    direction: "horizontal",
+    slidesPerView: 1,
+    loop: true,
     effect: "fade",
 	  fadeEffect: {
 		  crossFade: true
 	  },
+    loadOnTransitionStart: true,
+    loadPrevNextAmount: 2,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
     navigation: {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev"
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
     }
-    // effect: "fade",
     // fadeEffect: {
     //   crossFade: true
     // }

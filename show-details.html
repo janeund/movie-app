@@ -13,6 +13,8 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./lib/swiper-bundle.min.css">
+  <script src="./lib/swiper-bundle.min.js"></script>
   <title>Serie Details | MSB</title>
 </head>
 
@@ -65,9 +67,12 @@
 
       <section class="show-cast section-mb">
         <h4 class="details-title-secondary">Top Cast</h4>
-        <div class="details-cast slider-container">
+        <div class="swiper">
+          <div class="details-cast slider-container swiper-wrapper">
 
+          </div>
         </div>
+
         <!-- <div class="details-similar">
             <h3>More Like This</h3>
             <div class="similar-container slider-container">
@@ -79,7 +84,9 @@
 
       <section class="details-reviews section-mb">
         <h4 class="details-title-secondary">User reviews</h4>
-        <div class="reviews-container slider-container"></div>
+        <div class="swiper">
+          <div class="reviews-container slider-container swiper-wrapper"></div>
+        </div>
       </section>
     </div>
   </main>
