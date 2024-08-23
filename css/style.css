@@ -289,11 +289,7 @@ body {
 
 /* Hero slider */
 .hero-container {
-
-}
-
-.trending-item {
-  width: 40rem;
+  height: 30rem;
 }
 
 .hero-slider {
@@ -314,17 +310,16 @@ body {
 .trending-image-container {
   position: relative;
   height: 100%;
-  background-size: cover; 
+  background-size: cover;
 }
 
 .trending-item-img {
   display: block;
-  height: 100%;
+  height: 140%;
   width: 100%;
-  object-fit: cover;
   border-radius: var(--rounded);
   opacity: 0.6;
-  background-color: var(--clr-glass);
+  background-color: var(--clr-glass); 
 }
 
 .hero-item-content {
@@ -607,6 +602,45 @@ body {
 
 .genre:not(:last-child) {
   margin-right: 0.8rem;
+}
+
+.swiper-button-prev, 
+.swiper-button-next {
+  background-color: hsla(var(--clr-glass), .10) !important;
+  width: 3.5rem !important;
+  height: 3.5rem !important;
+  border-radius: 50% !important;
+  padding: 1rem !important;
+}
+
+.swiper-button-prev {
+  left: 2rem !important;
+}
+
+.swiper-button-next {
+  right: 2rem !important;
+}
+
+.swiper-button-next::after, 
+.swiper-button-prev::after {
+  color:#FFF !important;
+  font-size: 1.5rem !important;
+}
+
+.swiper-button-prev::after {
+  transform: translateX(-10%);
+}
+
+.swiper-button-next::after {
+  transform: translateX(10%);
+}
+
+.swiper-pagination {
+  bottom: 2rem !important;
+}
+
+.swiper-pagination-bullet {
+  background-color: #fff !important;
 }
 
 /* Cast slider */
