@@ -1,6 +1,6 @@
 # MSB Movie App
 
-MSB movie application as a platform to discover movies, TV-shows and celebrities. Project fetches data from external API [TMDB](https://www.themoviedb.org/) (version 3). Users can explore movies and TV-shows, learn about trending and top rated titles, look for for any relevant query in search bar.
+MSB movie application as a platform to discover movies, TV-shows and celebrities. Project fetches data from external API [TMDB](https://www.themoviedb.org/) (version 3). Users can explore movies and TV-shows, learn about trending and top rated titles, look for any relevant query in search bar.
 
 [Live Demo](https://movie-app-msb.netlify.app)
 
