@@ -5,6 +5,7 @@ TODO:
 4. load more at least for actor's movies
 5. overview limit with button learn more +
 6. pagination, navigation sliders styles
+7. reviews style (tooltip)
 
 
 problems i have been encountered with:

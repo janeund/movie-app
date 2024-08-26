@@ -70,7 +70,7 @@ body {
 .search-input {
   display: inline-flex;
   position: relative;
-  width: 22rem;
+  width: 20rem;
   height: 2.5rem;
   padding: 0.7rem;
   color: hsl(var(--clr-light));
@@ -206,7 +206,7 @@ body {
   height: 4rem;
   border: 8px solid #FFF;
   border-bottom-color: hsl(var(--clr-green));
-  border-radius: var(--rounded);
+  border-radius: 50%;
   display: none;
   animation: rotation 2s linear infinite;
 }
@@ -411,6 +411,31 @@ body {
   height: 16rem;
   filter: brightness(1);
 }
+
+.top-movies-slider {
+  position: relative;
+}
+
+.show-cast-slider:hover,
+.details-reviews-slider:hover,
+.movie-cast-slider:hover,
+.top-movies-slider:hover,
+.top-series-slider:hover {
+  mask-image: linear-gradient(to right, transparent 0%, black 15% 85%, transparent 100%);
+}
+
+.swiper-btns {
+  visibility: hidden;
+}
+
+.show-cast-slider:hover .swiper-btns,
+.top-movies-slider:hover .swiper-btns,
+.details-reviews-slider:hover .swiper-btns,
+.movie-cast-slider:hover .swiper-btns,
+.top-series-slider:hover .swiper-btns {
+  visibility: visible;
+}
+
 
 /* ----------------------------- */
 /* Popular movies and shows page */
@@ -669,7 +694,7 @@ body {
 }
 
 .review-card:not(:last-child) {
-  margin-right: 2rem;
+  margin-right: 1rem;
 }
 
 .review-card-header {
@@ -684,7 +709,7 @@ body {
   justify-content: center;
   background-color: hsl(var(--clr-light));
   border-radius: 50%;
-  border: 0.1rem solid hsl(var(--clr-dark));
+  border: 0.15rem solid hsl(var(--clr-dark));
   width: 2.2rem;
   height: 2.2rem;
 }
@@ -709,6 +734,7 @@ body {
 }
 .review-card-text {
   font-size: 0.9rem;
+  min-height: 6rem;
 }
 .review-card-footer {
   display: flex;

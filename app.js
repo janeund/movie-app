@@ -201,7 +201,8 @@ async function displayMovieReviews() {
           <div class="review-card-username">Review by <span>${review.author_details.username}</span></div>
         </div>
         <div class="review-card-main">
-          <p class="review-card-text">${review.content.slice(0, 50)}</p>
+          <div class="review-card-text">${review.content.slice(0, 110)}...</div>
+        </div>
         </div>
         <div class="review-card-footer">
           <div class="review-card-rating">
@@ -259,7 +260,7 @@ async function displayShowDetails() {
           <div class="rating">${show.vote_average.toFixed(1)} / 10 </div>
           <div class="vote-total">(${(show.vote_count / 1000).toFixed(1)}k)</div>
         </li>
-        <li class="details-runtime"></li>
+        <li class="details-runtime">${show.episode_run_time}min</li>
       </ul>
       <div class="details-tagline">${show.tagline}</div>
       <div class="details-overview">
@@ -322,7 +323,7 @@ async function displayShowReviews() {
           <div class="review-card-username">Review by <span>${review.author_details.username}</span></div>
         </div>
         <div class="review-card-main">
-          <p class="review-card-text">${review.content.slice(0, 50)}</p>
+          <p class="review-card-text">${review.content.slice(0, 110)}...</p>
         </div>
         <div class="review-card-footer">
           <div class="review-card-rating">
@@ -678,12 +679,14 @@ function displayOverlayImage(type, overlayPath) {
 
 function initSwiper() {
   const sliders = document.querySelectorAll('.swiper');
-  for (let slide of sliders) {
-    const nextEl = slide.querySelectorAll('.swiper-button-next')[0];
-    const prevEl = slide.querySelectorAll('.swiper-button-prev')[0];
-    const pagination = slide.querySelectorAll('.swiper-pagination')[0];
-    let carousel = new Swiper(slide, {
-      slidesPerView: 6,
+  for (let slider of sliders) {
+    const slides = slider.querySelectorAll('.swiper-slide');
+    console.log(slides.length);
+    const nextEl = slider.querySelectorAll('.swiper-button-next')[0];
+    const prevEl = slider.querySelectorAll('.swiper-button-prev')[0];
+    const pagination = slider.querySelectorAll('.swiper-pagination')[0];
+    let carousel = new Swiper(slider, {
+      slidesPerView: 5,
       loop: true,
         navigation: {
             nextEl,
@@ -693,26 +696,9 @@ function initSwiper() {
           el: pagination,
           clickable: true,
         },
+        
     });
   }
-
-  // swiperElements.forEach((slider, index) => {
-  //   let sliderLength = slider.children[0].children.length;
-  //   let result = (sliderLength > 1) ? true : false;
-  //   const swiper = new Swiper(`#${swiperEl.id}`,{
-  //     slidesPerView: 6,
-  //     loop: true,
-  //     // spaceBetween: 30,
-  //     // pagination: {
-  //     //   el: `.swiper-pagination-${swiperID}`,
-  //     //   clickable: true,
-  //     // },
-  //     navigation: {
-  //       nextEl: '.swiper-button-next'[index],
-  //       prevEl: `.swiper-button-prev-${swiperID}`
-  //     }
-  //   });
-  // })
 }
 
 // Init App
@@ -757,7 +743,7 @@ function init() {
       break;
   }
 
-  hightlightActiveLink()
+  hightlightActiveLink();
 }
 
 document.addEventListener('DOMContentLoaded', init);

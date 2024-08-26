@@ -12,6 +12,10 @@
   font: inherit;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 /* Remove list styles on ul elements */
 ul {
   list-style: none;
