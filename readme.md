@@ -25,9 +25,23 @@ MSB movie application as a platform to discover movies, TV-shows and celebrities
 - add responsiveness for different screen sizes
 - add option to filter and sort content by selected parameters
 
-## Installation and Usage
+## Start Locally
+
+Clone repository
 
 ```bash
 git clone https://github.com/janeund/movie-app
 cd movie-app
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Start local server via Vite
+
+```bash
+npm start dev
 ```

@@ -1,0 +1,19 @@
+{
+  "name": "movie-app",
+  "version": "1.0.0",
+  "description": "MSB movie application as a platform to discover movies, TV-shows and celebrities. Project fetches data from external API [TMDB](https://www.themoviedb.org/) (version 3). Users can explore movies and TV-shows, learn about trending and top rated titles, look for for any relevant query in search bar.",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^5.4.2"
+  }
+}
