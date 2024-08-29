@@ -11,11 +11,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="./css/reset.css">
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./lib/swiper-bundle.min.css">
-  <script src="./lib/swiper-bundle.min.js"></script>
-  <title>Serie Details | MSB</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <title>Search Results | MSB</title>
 </head>
 
 <body>
@@ -30,13 +28,13 @@
             <a class="navigation-link" href="/">Home</a>
           </li>
           <li class="navigation-item">
-            <a class="navigation-link" href="/movies.html">Movies</a>
+            <a class="navigation-link" href="/pages/movies.html">Movies</a>
           </li>
           <li class="navigation-item">
-            <a class="navigation-link" href="/shows.html">TV Series</a>
+            <a class="navigation-link" href="/pages/shows.html">TV Series</a>
           </li>
           <li class="navigation-item">
-            <a class="navigation-link" href="/people.html">People</a>
+            <a class="navigation-link" href="/pages/people.html">People</a>
           </li>
           <!-- <li class="navigation-item">
             <a class="navigation-link" href="/">More</a>
@@ -44,7 +42,7 @@
         </ul>
       </nav>
       <div class="search">
-        <form action="/search.html" class="search-form">
+        <form action="/pages/search.html" class="search-form">
           <div class="search-field">
             <input class="search-input" autocomplete="off" type="text" id="search-term" name="search-term"
               placeholder="Search for anything">
@@ -57,42 +55,20 @@
     </div>
   </header>
   <main class="main-content">
-    <div class="container show-details-container">
-      <div class="back-home">
-        <a class="btn btn-back" href="/index.html"><i class="fa-solid fa-chevron-left"></i>Back To Home Page</a>
-      </div>
-      <section class="show-details section-mb">
-
-      </section>
-
-      <section class="show-cast section-mb">
-        <h4 class="details-title-secondary">Top Cast</h4>
-        <div class="swiper show-cast-slider">
-          <div class="details-cast slider-container swiper-wrapper"></div>
-          <div class="swiper-btns">
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-          </div>
-        </div>
-
-        <!-- <div class="details-similar">
-            <h3>More Like This</h3>
-            <div class="similar-container slider-container">
-              <div class="similar-card"></div>
-            </div>
-          </div> -->
-
-      </section>
-
-      <section class="details-reviews section-mb">
-        <h4 class="details-title-secondary">User reviews</h4>
-        <div class="swiper details-reviews-slider">
-          <div class="reviews-container slider-container swiper-wrapper"></div>
-          <div class="swiper-btns">
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-          </div>
-        </div>
+    <div class="container">
+      <section class="search-results-wrapper section-mb">
+        <h1 class="search-results-title title-page">Search results</h1>
+        <!-- <div class="search-results-filters">
+          <ul class="search-results-filters-list">
+            <li class="search-results-filter-item search-filter-item-selected">All</li>
+            <li class="search-results-filter-item">Movies</li>
+            <li class="search-results-filter-item">TV Shows</li>
+            <li class="search-results-filter-item">Celebritites</li>
+          </ul>
+        </div> -->
+        <div class="search-results-heading"></div>
+        <ul class="search-results section-list-l"></ul>
+        <div class="search-pagination"></div>
       </section>
     </div>
   </main>
@@ -103,10 +79,11 @@
       </p>
     </div>
   </footer>
+
   <div class="loader-overlay">
     <div class="loader"></div>
   </div>
-  <script src="./app.js"></script>
+  <script src="../app.js"></script>
 </body>
 
 </html>

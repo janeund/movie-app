@@ -13,6 +13,9 @@ const global = {
   }
 }
 
+console.log(window.location.pathname);
+
+
 // Fetch data from tmdb API
 async function fetchAPIData(endpoint) {
   showLoader();
@@ -57,7 +60,7 @@ async function displayHeroSlider() {
       </ul>
       <p class="hero-item-overview">${item.overview}</p>
       <div class="learn-more-btn">
-        <a class="btn more-btn" href="movie-details.html?id=${item.id}">Learn More</a>
+        <a class="btn more-btn" href="/pages/movie-details.html?id=${item.id}">Learn More</a>
       </div>
     </div>
     `;
@@ -345,6 +348,8 @@ async function displayShowReviews() {
  
 }
 
+
+
 // Display popular people
 async function displayPopularPeople() {
   const { results } = await fetchAPIData('person/popular');
@@ -507,6 +512,8 @@ function minToHours(data) {
 function hightlightActiveLink() {
   const links = document.querySelectorAll('.navigation-link');
   links.forEach(link => {
+    console.log(global.currentPage);
+    
     if (link.getAttribute('href') === global.currentPage) {
       link.classList.add('active')
     }
@@ -711,34 +718,34 @@ function init() {
       displayTopMovies();
       displayTopSeries();
       break;
-    case '/movie-details.html':
+    case '/pages/movie-details.html':
       displayMovieDetails();
       displayMovieCast();
       displayMovieReviews();
       break;
-    case '/movies':
-    case '/movies.html':
+    case '/pages/movies':
+    case '/pages/movies.html':
       displayPopularMovies();
       break;
-    case '/show-details.html':
+    case '/pages/show-details.html':
       displayShowDetails();
       displayShowCast();
       displayShowReviews();
       break;
-    case '/shows':
-    case '/shows.html':
+    case '/pages/shows':
+    case '/pages/shows.html':
       displayPopularShows();
       break;
-    case '/people':
-    case '/people.html':
+    case '/pages/people':
+    case '/pages/people.html':
       displayPopularPeople();
       break;
-    case '/person-details.html':
+    case '/pages/person-details.html':
       displayPersonDetails();
       displayPersonImages();
       displayPersonCredits();
       break;
-    case '/search.html':
+    case '/pages/search.html':
       search();
       break;
   }
