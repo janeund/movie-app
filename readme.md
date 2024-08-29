@@ -14,15 +14,15 @@ MSB movie application is a platform to discover movies, TV-shows and celebrities
 
 ## Features
 
-- Fetching information about movies/series/people from external API
-- Integrated Swiper sliders for cards showcases
-- Loading spinner for visualizing request in process
-- Search box which accepts user input to be searched and then redirects to results page with pagination
+- fetching information about movies/series/people from external API
+- integrated Swiper sliders for cards showcases
+- loading spinner for visualizing request in process
+- search box which accepts user input to be searched and then redirects to results page with pagination
 
 ## Future Improvements
 
 - add responsiveness for different screen sizes
-- add option to filter and sort content by selected parameters
+- dd option to filter and sort content by selected parameters
 
 ## Start Locally
 
