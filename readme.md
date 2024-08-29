@@ -22,7 +22,7 @@ MSB movie application is a platform to discover movies, TV-shows and celebrities
 ## Future Improvements
 
 - add responsiveness for different screen sizes
-- dd option to filter and sort content by selected parameters
+- add option to filter and sort content by selected parameters
 
 ## Start Locally
 
