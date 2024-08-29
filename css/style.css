@@ -414,26 +414,30 @@ body {
 
 .top-movies-slider {
   position: relative;
+  
 }
 
-.show-cast-slider:hover,
+/* .show-cast-slider:hover,
 .details-reviews-slider:hover,
 .movie-cast-slider:hover,
 .top-movies-slider:hover,
 .top-series-slider:hover {
   mask-image: linear-gradient(to right, transparent 0%, black 15% 85%, transparent 100%);
-}
+} */
 
 .swiper-btns {
   visibility: hidden;
+  opacity: 0;
 }
 
 .show-cast-slider:hover .swiper-btns,
 .top-movies-slider:hover .swiper-btns,
 .details-reviews-slider:hover .swiper-btns,
 .movie-cast-slider:hover .swiper-btns,
-.top-series-slider:hover .swiper-btns {
+.top-series-slider:hover .swiper-btns,
+.photos-content:hover .swiper-btns {
   visibility: visible;
+  opacity: 1;
 }
 
 

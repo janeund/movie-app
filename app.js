@@ -76,7 +76,7 @@ async function displayTopMovies() {
     const card = document.createElement('div');
     card.classList.add('top-movies-card', 'card', 'swiper-slide');
     card.innerHTML = ` 
-    <a href="movie-details.html?id=${movie.id}">
+    <a href="/pages/movie-details.html?id=${movie.id}">
       <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
     </a>
     <div class="card-body">
@@ -95,7 +95,7 @@ async function displayTopSeries() {
     const card = document.createElement('div');
     card.classList.add('top-series-card', 'card', 'swiper-slide');
     card.innerHTML = ` 
-    <a href="show-details.html?id=${tv.id}">
+    <a href="/pages/show-details.html?id=${tv.id}">
       <img class='slider-card-image' src="https://image.tmdb.org/t/p/w500/${tv.poster_path}" alt="${tv.name}">
     </a>
     <div class="card-body">
