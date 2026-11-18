@@ -6,15 +6,18 @@ MSB movie application is a platform to discover movies, TV-shows and celebrities
 
 ## Technologies Used
 
-- HTML5
+- React 18 + TypeScript (strict mode)
+- React Router (single-page app)
+- Swiper (React components)
 - CSS3
-- Vanilla JavaScript
-- Swiper.js Library
+- Vite
 - The Movie DB API
 
 ## Features
 
-- Fetching information about movies/series/people from external API
+- Fetching information about movies/series/people from external API with typed responses
+- Single-page navigation with shareable URLs (`/movie/:id`, `/show/:id`, `/person/:id`, `/search?q=`)
+- Old page links (`/pages/movie-details.html?id=…`) redirect to the new routes
 - Integrated Swiper sliders for cards showcases, with responsive slides per view
 - Loading spinner for visualizing request in process
 - Search box which accepts user input to be searched and then redirects to results page with pagination
@@ -23,6 +26,19 @@ MSB movie application is a platform to discover movies, TV-shows and celebrities
 - User reviews slider (1 / 2 / 3 cards depending on screen width); section is hidden when there are no reviews
 - Actor filmography loads 10 titles at a time with a "Load more" button
 - Expandable actor biography ("Read more" / "Read less"); short biographies are shown in full
+- "Not found" pages for wrong links and missing titles
+
+## Project Structure
+
+```
+src/
+  api/tmdb.ts          requests, image URLs, loading counter
+  api/types.ts         TMDB response types
+  hooks/               useTmdb (data fetching), useDocumentTitle
+  components/          Header, Layout, Slider, MediaCard, DetailsTop, ReviewCard, ...
+  pages/               Home, Popular (movies / shows / people), Movie, Show, Person, Search
+  styles/              site styles
+```
 
 ## Future Improvements
 

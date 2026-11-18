@@ -1,0 +1,30 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Old multi-page URLs keep working (query string such as ?id=123 is passed along)
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/pages/movies.html"
+  to = "/movies"
+  status = 301
+
+[[redirects]]
+  from = "/pages/shows.html"
+  to = "/shows"
+  status = 301
+
+[[redirects]]
+  from = "/pages/people.html"
+  to = "/people"
+  status = 301
+
+# Single-page app: every other path is handled by React Router
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
