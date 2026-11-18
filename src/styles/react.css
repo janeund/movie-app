@@ -120,3 +120,14 @@
   height: 100%;
   object-fit: cover;
 }
+
+/* Swiper 14 draws arrows as SVG icons: keep them white like before */
+:root {
+  --swiper-navigation-color: #fff;
+  --swiper-navigation-size: 1.4rem;
+}
+
+.swiper-navigation-icon {
+  width: 0.7rem;
+  height: auto;
+}

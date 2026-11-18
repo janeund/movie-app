@@ -2,6 +2,10 @@
   command = "npm run build"
   publish = "dist"
 
+[build.environment]
+  # Vite 8 needs Node 20.19+
+  NODE_VERSION = "22"
+
 # Old multi-page URLs keep working (query string such as ?id=123 is passed along)
 [[redirects]]
   from = "/index.html"
