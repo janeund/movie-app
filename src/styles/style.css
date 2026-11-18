@@ -412,6 +412,7 @@ body {
 .top-header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .top-title {
