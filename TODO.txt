@@ -1,9 +1,9 @@
 TODO:
-1. responsiviness
+1. responsiviness - done
 2. sizes of cards and fonts
 3. interactive search bar
-4. load more at least for actor's movies
-5. overview limit with button learn more +
+4. load more at least for actor's movies - done
+5. overview limit with button learn more + - done
 6. pagination, navigation sliders styles
 7. reviews style (tooltip)
 

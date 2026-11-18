@@ -717,6 +717,12 @@ function initMobileMenu() {
   setOpen(false);
   burger.addEventListener('click', () => setOpen(!header.classList.contains('menu-open')));
   nav.addEventListener('click', e => { if (e.target.closest('a')) setOpen(false); });
+  // Close when tapping anywhere outside the menu
+  document.addEventListener('click', e => {
+    if (header.classList.contains('menu-open') && !nav.contains(e.target) && !burger.contains(e.target)) {
+      setOpen(false);
+    }
+  });
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && header.classList.contains('menu-open')) {
       setOpen(false);

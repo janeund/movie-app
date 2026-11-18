@@ -15,14 +15,19 @@ MSB movie application is a platform to discover movies, TV-shows and celebrities
 ## Features
 
 - Fetching information about movies/series/people from external API
-- Integrated Swiper sliders for cards showcases
+- Integrated Swiper sliders for cards showcases, with responsive slides per view
 - Loading spinner for visualizing request in process
 - Search box which accepts user input to be searched and then redirects to results page with pagination
+- Responsive layout for mobile, tablet and desktop
+- Mobile burger menu that drops down over the page (closes on link tap, outside tap or Esc)
+- User reviews slider (1 / 2 / 3 cards depending on screen width); section is hidden when there are no reviews
+- Actor filmography loads 10 titles at a time with a "Load more" button
+- Expandable actor biography ("Read more" / "Read less"); short biographies are shown in full
 
 ## Future Improvements
 
-- Add responsiveness for different screen sizes
 - Add option to filter and sort content by selected parameters
+- Load more / pagination for other long lists
 
 ## Start Locally
 
@@ -42,5 +47,5 @@ npm install
 Start local server via Vite
 
 ```bash
-npm start dev
+npm run dev
 ```
