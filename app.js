@@ -13,7 +13,6 @@ const global = {
   }
 }
 
-console.log(window.location.pathname);
 
 
 // Fetch data from tmdb API
@@ -435,7 +434,6 @@ function readMoreBiography() {
 async function displayPersonImages() {
   const personID = window.location.search.split('=')[1];
   const { profiles } = await fetchAPIData(`person/${personID}/images`);
-  console.log(profiles);
   if (profiles.length > 0) {
     profiles.forEach(image => {
       const card = document.createElement('div');
@@ -503,7 +501,6 @@ async function displayPersonCredits() {
 // Convert total minutes to hours with minutes reminder
 function minToHours(data) {
   const hours = Math.floor(data / 60);
-  console.log(data);
   const min = data % 60; 
   return `${hours}h ${min}min`;
 }
@@ -512,7 +509,6 @@ function minToHours(data) {
 function hightlightActiveLink() {
   const links = document.querySelectorAll('.navigation-link');
   links.forEach(link => {
-    console.log(global.currentPage);
     
     if (link.getAttribute('href') === global.currentPage) {
       link.classList.add('active')
@@ -686,15 +682,18 @@ function displayOverlayImage(type, overlayPath) {
 
 function initSwiper() {
   const sliders = document.querySelectorAll('.swiper');
+  const slidesPerView = 5;
   for (let slider of sliders) {
     const slides = slider.querySelectorAll('.swiper-slide');
-    console.log(slides.length);
+    // Skip sliders that are already initialised or still waiting for data
+    if (slider.swiper || slides.length === 0) continue;
     const nextEl = slider.querySelectorAll('.swiper-button-next')[0];
     const prevEl = slider.querySelectorAll('.swiper-button-prev')[0];
     const pagination = slider.querySelectorAll('.swiper-pagination')[0];
-    let carousel = new Swiper(slider, {
-      slidesPerView: 5,
-      loop: true,
+    new Swiper(slider, {
+      slidesPerView,
+      // Loop mode needs enough slides, otherwise Swiper warns and disables it
+      loop: slides.length >= slidesPerView * 2,
         navigation: {
             nextEl,
             prevEl,
