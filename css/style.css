@@ -25,6 +25,8 @@ body {
   color: hsl(var(--clr-light));
   display: grid;
   grid-template-rows: auto 1fr auto;
+  /* minmax(0, 1fr) lets content (sliders, long titles) shrink to the screen */
+  grid-template-columns: minmax(0, 1fr);
   min-height: 100%;
 }
 
@@ -65,6 +67,41 @@ body {
 .navigation-link {
   font-size: 1.2rem;
   font-weight: 500;
+}
+
+/* Burger button: only shown on small screens */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.6rem;
+  border: none;
+  border-radius: var(--rounded);
+  background-color: hsla(var(--clr-glass), .10);
+  cursor: pointer;
+}
+
+.burger span {
+  display: block;
+  height: 2px;
+  background-color: hsl(var(--clr-light));
+  border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.menu-open .burger span:nth-child(1) {
+  transform: translateY(calc(0.35rem + 2px)) rotate(45deg);
+}
+
+.menu-open .burger span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-open .burger span:nth-child(3) {
+  transform: translateY(calc(-0.35rem - 2px)) rotate(-45deg);
 }
 
 .search-input {
@@ -114,6 +151,17 @@ body {
   border-radius: var(--rounded);
 }
 
+.btn-load-more {
+  display: flex;
+  margin: 2rem auto 0;
+  padding: 0.8rem 1.6rem;
+  cursor: pointer;
+}
+
+.btn-load-more[hidden] {
+  display: none;
+}
+
 .fa-chevron-left {
   font-size: 0.6rem;
   padding-right: 0.3rem;
@@ -147,6 +195,11 @@ body {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(7.1px);
   -webkit-backdrop-filter: blur(7.1px);
+}
+
+/* In sliders Swiper sizes the slides */
+.swiper-slide.card {
+  min-width: 0;
 }
 
 .card a {
@@ -240,7 +293,7 @@ body {
 
 .section-list-l {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(50rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 50rem), 1fr));
   gap: 2rem;
 }
 
@@ -549,22 +602,30 @@ body {
   position: relative;
 }
 
-.details-overview-text.active {
-  height: auto;
-}
-
-.details-overview-text.active::after {
-  background: transparent;
-}
-
+/* Fade only the last lines of the collapsed text */
 .details-overview-text.person::after {
   position: absolute;
   content: "";
-  top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-  background: linear-gradient(180deg, hsla(var(--clr-gray), .10), hsla(var(--clr-gray), .10), hsl(var(--clr-gray)));
+  height: 4rem;
+  background: linear-gradient(180deg, transparent, hsl(var(--clr-gray)));
+  pointer-events: none;
+}
+
+.details-overview-text.person.active {
+  height: auto;
+}
+
+.details-overview-text.person.active::after {
+  display: none;
+}
+
+/* Line the button up with the text, which has 0.5rem padding */
+.read-more {
+  margin-inline-start: 0.5rem;
+  cursor: pointer;
 }
 
 .details-facts {
@@ -679,26 +740,26 @@ body {
 
 /* User reviews section */
 
-.reviews-container {
-  padding: 1rem;
-  
+/* Room for the card shadow, which Swiper's overflow would otherwise clip */
+.details-reviews-slider {
+  padding: 0.25rem;
+}
+
+/* Swiper sets slide widths and spacing itself (spaceBetween) */
+.swiper-wrapper.slider-container {
+  gap: 0;
 }
 
 .review-card {
   display: flex;
   flex-direction: column;
-  min-width: 20rem;
   min-height: 12rem;
-  height: 100%;
+  height: auto;
   padding: 1rem;
   background-color: hsla(0, 0%, 100%, .70);
   box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
   border-radius: var(--rounded);
   color: hsl(var(--clr-dark));
-}
-
-.review-card:not(:last-child) {
-  margin-right: 1rem;
 }
 
 .review-card-header {
@@ -740,6 +801,11 @@ body {
   font-size: 0.9rem;
   min-height: 6rem;
 }
+.review-no-rating {
+  font-weight: 400;
+  opacity: 0.6;
+}
+
 .review-card-footer {
   display: flex;
   justify-content: space-between;
@@ -821,7 +887,7 @@ body {
 
 .search-results {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
   gap: 1rem;
   margin-block-end: 1rem;
 }
@@ -914,4 +980,234 @@ body {
 
 .no-image-big img {
   width: 17rem;
+}
+/* ----------------------------- */
+/* Responsive                    */
+/* ----------------------------- */
+@media (max-width: 1024px) {
+  .header {
+    height: auto;
+    padding-block: 1.2rem;
+  }
+
+  .header-container {
+    flex-wrap: wrap;
+    row-gap: 1rem;
+  }
+
+  .search {
+    flex-basis: 100%;
+  }
+
+  .search-field {
+    display: flex;
+    position: relative;
+  }
+
+  .search-btn {
+    top: 0;
+    right: 0;
+    transform: none;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .hero-item-content {
+    left: 10%;
+    right: 10%;
+  }
+
+  .details-top {
+    column-gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-inline: 1rem;
+  }
+
+  .logo {
+    font-size: 2.2rem;
+  }
+
+  /* Header: logo + burger on top, menu drops down, search below */
+  .burger {
+    display: flex;
+  }
+
+  .navigation {
+    order: 3;
+    flex-basis: 100%;
+    display: none;
+  }
+
+  .menu-open .navigation {
+    display: block;
+  }
+
+  .navigation-list {
+    flex-direction: column;
+    background-color: hsla(var(--clr-glass), .06);
+    border-radius: var(--rounded);
+    padding: 0.4rem 1rem;
+  }
+
+  .navigation-item:not(:last-child) {
+    margin-right: 0;
+    border-bottom: 1px solid hsla(var(--clr-glass), .08);
+  }
+
+  .navigation-link {
+    display: block;
+    padding-block: 0.8rem;
+    font-size: 1.1rem;
+  }
+
+  .search {
+    order: 4;
+  }
+
+  .title-page {
+    font-size: 2rem;
+  }
+
+  /* Hero slider */
+  .hero-container {
+    height: 26rem;
+  }
+
+  .trending-item-img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-item-content {
+    top: auto;
+    bottom: 3rem;
+    left: 1rem;
+    right: 1rem;
+    height: auto;
+    max-width: none;
+  }
+
+  .hero-item-title {
+    font-size: 1.6rem;
+  }
+
+  .hero-item-overview {
+    font-size: 0.85rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .hero-container .swiper-button-prev,
+  .hero-container .swiper-button-next {
+    display: none;
+  }
+
+  .swiper-pagination {
+    bottom: 0.8rem !important;
+  }
+
+  /* Popular lists: two columns of smaller cards */
+  .popular-wrapper {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+    margin-block-end: 3rem;
+  }
+
+  .card {
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .card a,
+  .popular-show-card a {
+    min-height: 0;
+  }
+
+  .popular-show-card,
+  .popular-movie-card,
+  .popular-person-card {
+    padding: 0.6rem;
+  }
+
+  /* Details pages: poster above the info */
+  .details-top {
+    grid-template-columns: 1fr;
+    row-gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .details-poster {
+    max-width: 18rem;
+    margin-inline: auto;
+  }
+
+  .details-title-main {
+    font-size: 1.8rem;
+  }
+
+  .details-facts,
+  .genres {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .details-facts > li:not(:last-child),
+  .genre:not(:last-child) {
+    margin-right: 0;
+  }
+
+  .back-home {
+    margin-block: 1rem;
+  }
+
+  .section-mb {
+    margin-bottom: 2.5rem;
+  }
+
+  .no-image-big {
+    height: 20rem;
+  }
+
+  .no-image-big img {
+    width: 10rem;
+  }
+
+  /* Person credits */
+  .section-list-l {
+    gap: 1rem;
+  }
+
+  .card-l {
+    height: auto;
+    min-height: 8rem;
+  }
+
+  .credits-item-title {
+    font-size: 1.1rem;
+  }
+
+  .credit-poster {
+    min-width: 4.5rem;
+    max-width: 4.5rem;
+  }
+
+  /* Search */
+  .search-results-filters-list,
+  .filters-list {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .footer {
+    min-height: 5rem;
+    padding-block: 1rem;
+  }
 }

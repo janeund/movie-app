@@ -184,42 +184,50 @@ async function displayMovieCast() {
   initSwiper();
 }
 
+// Build a review card for the reviews slider
+function createReviewCard(review) {
+  const { username, avatar_path, rating } = review.author_details;
+  const card = document.createElement('div');
+  card.classList.add('review-card', 'swiper-slide');
+  card.innerHTML = `
+      <div class="review-card-header">
+        <div class="review-card-avatar">
+        ${
+          avatar_path
+          ? `<img class="review-image" src="https://image.tmdb.org/t/p/w500/${avatar_path}" alt="${username}">`
+          : `<i class="fa-regular fa-user"></i>`
+        }
+        </div>
+        <div class="review-card-username">Review by <span>${username}</span></div>
+      </div>
+      <div class="review-card-main">
+        <p class="review-card-text">${review.content.slice(0, 110)}...</p>
+      </div>
+      <div class="review-card-footer">
+        <div class="review-card-rating">
+          ${rating ? `<i class="fa-solid fa-star"></i> ${rating} / 10` : `<span class="review-no-rating">No rating</span>`}
+        </div>
+        <div class="review-date">${new Date(review.created_at).toLocaleDateString('en-US')}</div>
+      </div>`;
+  return card;
+}
+
+// Fill the reviews slider, or hide the section when there are no reviews
+function displayReviews(results) {
+  if (results.length === 0) {
+    document.querySelector('.details-reviews').style.display = 'none';
+    return;
+  }
+  const container = document.querySelector('.reviews-container');
+  results.forEach(review => container.appendChild(createReviewCard(review)));
+  initSwiper();
+}
+
 // Display movie reviews
 async function displayMovieReviews() {
   const movieID = window.location.search.split('=')[1];
   const { results } = await fetchAPIData(`movie/${movieID}/reviews`);
-  results.forEach(review => {
-    const card = document.createElement('div');
-    card.classList.add('review-card', 'swiper-slide');
-    card.innerHTML = `
-        <div class="review-card-header">
-          <div class="review-card-avatar">
-          ${
-            review.author_details.avatar_path 
-            ? `<img class="review-image" src="https://image.tmdb.org/t/p/w500/${review.author_details.avatar_path}" alt="${review.author_details.username}">`
-            : `<i class="fa-regular fa-user"></i>`
-          }
-          </div>
-          <div class="review-card-username">Review by <span>${review.author_details.username}</span></div>
-        </div>
-        <div class="review-card-main">
-          <div class="review-card-text">${review.content.slice(0, 110)}...</div>
-        </div>
-        </div>
-        <div class="review-card-footer">
-          <div class="review-card-rating">
-            <i class="fa-solid fa-star"></i>
-            ${ 
-              review.author_details.rating 
-              ? `${review.author_details.rating} / 10` 
-              : `<div></div>`
-            }
-          </div>
-          <div class="review-date">${new Date(review.created_at).toLocaleDateString('en-US')}</div>
-        </div>`;
-      document.querySelector('.reviews-container').appendChild(card);
-  });
-  initSwiper();
+  displayReviews(results);
 }
 
 // Display popular shows
@@ -309,42 +317,7 @@ async function displayShowCast() {
 async function displayShowReviews() {
   const showID = window.location.search.split('=')[1];
   const { results } = await fetchAPIData(`tv/${showID}/reviews`);
-  if (results.length !== 0) {
-     results.forEach(review => {
-    const card = document.createElement('div');
-    card.classList.add('review-card', 'swiper-slide');
-    card.innerHTML = `
-        <div class="review-card-header">
-          <div class="review-card-avatar">
-          ${
-            review.author_details.avatar_path 
-            ? `<img class="review-image" src="https://image.tmdb.org/t/p/w500/${review.author_details.avatar_path}" alt="${review.author_details.username}">`
-            : `<i class="fa-regular fa-user"></i>`
-          }
-          </div>
-          <div class="review-card-username">Review by <span>${review.author_details.username}</span></div>
-        </div>
-        <div class="review-card-main">
-          <p class="review-card-text">${review.content.slice(0, 110)}...</p>
-        </div>
-        <div class="review-card-footer">
-          <div class="review-card-rating">
-            <i class="fa-solid fa-star"></i>
-            ${ 
-              review.author_details.rating 
-              ? `${review.author_details.rating} / 10` 
-              : `<div></div>`
-            }
-          </div>
-          <div class="review-date">${new Date(review.created_at).toLocaleDateString('en-US')}</div>
-        </div>`;
-      document.querySelector('.reviews-container').appendChild(card);
-  })
-  initSwiper();
-  } else {
-    document.querySelector('.details-reviews').style.display = 'none';
-  }
- 
+  displayReviews(results);
 }
 
 
@@ -408,25 +381,25 @@ async function displayPersonDetails() {
     </div>
   </div>`;
   document.querySelector('.person-details').appendChild(personInner);
-  `${
-    person.biography
-    ? readMoreBiography()
-    : ''
-  }`
+  if (person.biography) readMoreBiography();
 }
 
-// Read more button for biography expansion 
+// Read more button for biography expansion
 function readMoreBiography() {
   const readMoreBtn = document.querySelector('.read-more');
   const contentBox = document.querySelector('.details-overview-text.person');
+  // Short biographies fit without collapsing: show them in full, no button
+  if (contentBox.scrollHeight <= contentBox.clientHeight) {
+    contentBox.classList.add('active');
+    readMoreBtn.remove();
+    return;
+  }
+  readMoreBtn.setAttribute('aria-expanded', 'false');
   readMoreBtn.addEventListener('click', () => {
-    contentBox.classList.toggle('active');
-    readMoreBtn.classList.toggle('active');
-    if (readMoreBtn.classList.contains('active')) {
-      readMoreBtn.textContent = 'Read Less';
-    } else {
-      readMoreBtn.textContent = 'Read More'
-    }
+    const expanded = contentBox.classList.toggle('active');
+    readMoreBtn.textContent = expanded ? 'Read Less' : 'Read More';
+    readMoreBtn.setAttribute('aria-expanded', String(expanded));
+    if (!expanded) contentBox.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   })
 }
 
@@ -449,53 +422,65 @@ async function displayPersonImages() {
  
 }
 
-// Display person credits on person details page
+// Display person credits on person details page, 10 at a time
+const CREDITS_PAGE_SIZE = 10;
+
+function createCreditCard(credit) {
+  const card = document.createElement('li');
+  card.classList.add('credits-item', 'card-l');
+  card.innerHTML = `
+          <a class="credit-poster" href="${credit.media_type}-details.html?id=${credit.id}">
+          ${
+            credit.poster_path
+            ? `<img src="https://image.tmdb.org/t/p/w500/${credit.poster_path}" alt="${credit.title}">`
+            : `<div class='no-image'>No image</div>`
+          }
+          </a>
+          <div class="credit-info">
+            <div class="credits-item-top">
+              <h4 class="credits-item-title">${credit.title}</h4>
+              <p class="credits-item-date">${credit.release_date ? credit.release_date.slice(0, 4) : ''}</p>
+            </div>
+            <div class="credits-facts">
+              ${
+                credit.vote_average
+                ? `
+                <div class="credits-vote">
+                  <i class="fa-solid fa-star"></i>
+                  <div class="rating">${credit.vote_average.toFixed(1)}</div>
+                </div>`
+                : ''
+              }
+              <div class="credits-character">${credit.character || ''}</div>
+            </div>
+          </div>
+       `;
+  return card;
+}
+
 async function displayPersonCredits() {
   const personID = window.location.search.split('=')[1];
   const { cast } = await fetchAPIData(`person/${personID}/combined_credits`);
-  cast.forEach(credit => {
-    const mediaType = cast.media_type;
-    if (credit.title) {
-      const card = document.createElement('li');
-      card.classList.add('credits-item', 'card-l');
-      card.innerHTML = `
-              <a class="credit-poster" href="${credit.media_type}-details.html?id=${credit.id}">
-              ${
-                credit.poster_path 
-                ? `<img src="https://image.tmdb.org/t/p/w500/${credit.poster_path}" alt="${credit.title}">`
-                : `<div class='no-image'>No image</div>`
-              }
-              </a>
-              <div class="credit-info">
-                <div class="credits-item-top">
-                  <h4 class="credits-item-title">${credit.title}</h4>
-                  <p class="credits-item-date">
-                  ${
-                    credit.release_date
-                    ? credit.release_date.slice(0, 4)
-                    : ''
-                  }
-                  </p>
-                </div>
-                <div class="credits-facts">
-                  ${
-                    credit.vote_average
-                    ? `
-                    <div class="credits-vote">
-                      <i class="fa-solid fa-star"></i>
-                      <div class="rating">${credit.vote_average}</div>
-                    </div>`
-                    : ''
-                  }
-                  <div class="credits-character">
-                  ${credit.character}
-                  </div>
-                </div>
-              </div>
-           `;
-    document.querySelector('.credits-list').appendChild(card);
-    }
-  })
+  const credits = cast.filter(credit => credit.title);
+  const list = document.querySelector('.credits-list');
+  let shown = 0;
+
+  const loadMoreBtn = document.createElement('button');
+  loadMoreBtn.className = 'btn btn-load-more';
+  list.after(loadMoreBtn);
+
+  function showNext() {
+    credits
+      .slice(shown, shown + CREDITS_PAGE_SIZE)
+      .forEach(credit => list.appendChild(createCreditCard(credit)));
+    shown = Math.min(shown + CREDITS_PAGE_SIZE, credits.length);
+    const left = credits.length - shown;
+    loadMoreBtn.textContent = `Load more (${left})`;
+    loadMoreBtn.hidden = left === 0;
+  }
+
+  loadMoreBtn.addEventListener('click', showNext);
+  showNext();
 }
 
 // Convert total minutes to hours with minutes reminder
@@ -682,33 +667,67 @@ function displayOverlayImage(type, overlayPath) {
 
 function initSwiper() {
   const sliders = document.querySelectorAll('.swiper');
-  const slidesPerView = 5;
   for (let slider of sliders) {
     const slides = slider.querySelectorAll('.swiper-slide');
     // Skip sliders that are already initialised or still waiting for data
     if (slider.swiper || slides.length === 0) continue;
-    const nextEl = slider.querySelectorAll('.swiper-button-next')[0];
-    const prevEl = slider.querySelectorAll('.swiper-button-prev')[0];
-    const pagination = slider.querySelectorAll('.swiper-pagination')[0];
+    const isReviews = slider.classList.contains('details-reviews-slider');
+    // Reviews are wide text cards, so show fewer of them per view
+    const breakpoints = isReviews
+      ? { 0: { slidesPerView: 1 }, 700: { slidesPerView: 2 }, 1100: { slidesPerView: 3 } }
+      : { 0: { slidesPerView: 2 }, 600: { slidesPerView: 3 }, 900: { slidesPerView: 4 }, 1200: { slidesPerView: 5 } };
+    const maxPerView = isReviews ? 3 : 5;
     new Swiper(slider, {
-      slidesPerView,
+      spaceBetween: window.innerWidth < 600 ? 10 : 16,
+      breakpoints,
       // Loop mode needs enough slides, otherwise Swiper warns and disables it
-      loop: slides.length >= slidesPerView * 2,
-        navigation: {
-            nextEl,
-            prevEl,
-        },
-        pagination: {
-          el: pagination,
-          clickable: true,
-        },
-        
+      loop: slides.length >= maxPerView * 2,
+      navigation: {
+        nextEl: slider.querySelector('.swiper-button-next'),
+        prevEl: slider.querySelector('.swiper-button-prev'),
+      },
+      pagination: {
+        el: slider.querySelector('.swiper-pagination'),
+        clickable: true,
+      },
     });
   }
 }
 
+// Burger menu for small screens (the header is the same on every page)
+function initMobileMenu() {
+  const header = document.querySelector('.header-container');
+  const nav = header?.querySelector('.navigation');
+  if (!nav) return;
+  nav.id = 'main-navigation';
+
+  const burger = document.createElement('button');
+  burger.className = 'burger';
+  burger.type = 'button';
+  burger.setAttribute('aria-controls', nav.id);
+  burger.innerHTML = '<span></span><span></span><span></span>';
+  nav.before(burger);
+
+  function setOpen(open) {
+    header.classList.toggle('menu-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+
+  setOpen(false);
+  burger.addEventListener('click', () => setOpen(!header.classList.contains('menu-open')));
+  nav.addEventListener('click', e => { if (e.target.closest('a')) setOpen(false); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && header.classList.contains('menu-open')) {
+      setOpen(false);
+      burger.focus();
+    }
+  });
+}
+
 // Init App
 function init() {
+  initMobileMenu();
   switch (global.currentPage) {
     case '/':
     case '/index':
